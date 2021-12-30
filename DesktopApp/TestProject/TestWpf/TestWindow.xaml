@@ -1,0 +1,8 @@
+﻿<Window x:Class="TestWpf.TestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TestWindow" Height="600" Width="600" Loaded="TestWindow_OnLoaded">
+	<Grid>
+		<Frame x:Name="FrameMain" />
+	</Grid>
+</Window>

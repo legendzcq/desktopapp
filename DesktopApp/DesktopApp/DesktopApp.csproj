@@ -1,0 +1,358 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>CdelCourse</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\DesktopApp.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>DesktopApp.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE;CHINAACC,MULTYDOWN,MULTYTASK</DefineConstants>
+    <PlatformTarget>x86</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE;CHINAACC,MULTYDOWN,MULTYTASK</DefineConstants>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Update="db\db.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\lecture.html" />
+    <Resource Include="Assets\logo.png" />
+    <Resource Include="Images\DesktopApp.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Login\bottom_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Login\top_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Login\login_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Login\btn_login.png" />
+    <Resource Include="Images\Login\btn_login_hover.png" />
+    <Resource Include="Images\Login\btn_login_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Login\btn_regist.png" />
+    <Resource Include="Images\Login\btn_regist_hover.png" />
+    <Resource Include="Images\Login\btn_regist_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\main_bottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\btn_close_hover.png" />
+    <Resource Include="Images\Main\btn_close_normal.png" />
+    <Resource Include="Images\Main\btn_close_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\btn_max_hover.png" />
+    <Resource Include="Images\Main\btn_max_normal.png" />
+    <Resource Include="Images\Main\btn_max_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Course\btn_play_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Course\grid_header_background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Course\btn_play_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Chapter\chk_select.png" />
+    <Resource Include="Images\Chapter\chk_unselect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Chapter\btn_play_chapter_hover.png" />
+    <Resource Include="Images\Chapter\btn_play_chapter_normal.png" />
+    <Resource Include="Images\Chapter\btn_play_chapter_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\main_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\msgbox_close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\msgbox_ok_hover.png" />
+    <Resource Include="Images\Main\msgbox_ok_normal.png" />
+    <Resource Include="Images\Main\msgbox_ok_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\btn_normal_hover.png" />
+    <Resource Include="Images\Main\btn_normal_normal.png" />
+    <Resource Include="Images\Main\btn_normal_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Paper\btn_refresh_hover.png" />
+    <Resource Include="Images\Paper\btn_refresh_normal.png" />
+    <Resource Include="Images\Paper\btn_refresh_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Paper\papericon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Paper\exam_do.png" />
+    <Resource Include="Images\Paper\exam_error.png" />
+    <Resource Include="Images\Paper\exam_right.png" />
+    <Resource Include="Images\Paper\exam_undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Paper\btn_fav_hover.png" />
+    <Resource Include="Images\Paper\btn_fav_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Paper\btn_next_hover.png" />
+    <Resource Include="Images\Paper\btn_next_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Paper\btn_pre_hover.png" />
+    <Resource Include="Images\Paper\btn_pre_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Paper\exam_title_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Paper\testleft-bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Paper\exam_time.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Paper\btn_errorrecord_hover.png" />
+    <Resource Include="Images\Paper\btn_errorrecord_normal.png" />
+    <Resource Include="Images\Paper\btn_handin_hover.png" />
+    <Resource Include="Images\Paper\btn_handin_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Paper\btn_answer_hover.png" />
+    <Resource Include="Images\Paper\btn_answer_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Play\jy_title_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Play\jy_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Play\btn_jy_left_hover.png" />
+    <Resource Include="Images\Play\btn_jy_left_normal.png" />
+    <Resource Include="Images\Play\btn_jy_left_press.png" />
+    <Resource Include="Images\Play\btn_jy_right_hover.png" />
+    <Resource Include="Images\Play\btn_jy_right_normal.png" />
+    <Resource Include="Images\Play\btn_jy_right_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Play\btn_fullscreen_hover.png" />
+    <Resource Include="Images\Play\btn_fullscreen_normal.png" />
+    <Resource Include="Images\Play\btn_left_hover.png" />
+    <Resource Include="Images\Play\btn_left_normal.png" />
+    <Resource Include="Images\Play\btn_pause_hover.png" />
+    <Resource Include="Images\Play\btn_pause_normal.png" />
+    <Resource Include="Images\Play\btn_play_hover.png" />
+    <Resource Include="Images\Play\btn_play_normal.png" />
+    <Resource Include="Images\Play\btn_right_hover.png" />
+    <Resource Include="Images\Play\btn_right_normal.png" />
+    <Resource Include="Images\Play\btn_sound_hover.png" />
+    <Resource Include="Images\Play\btn_sound_normal.png" />
+    <Resource Include="Images\Play\playctl.png" />
+    <Resource Include="Images\Play\sound_speed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Images\btn.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\btnhover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Images\check.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\uncheck.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Play\btn_fullback_hover.png" />
+    <Resource Include="Images\Play\btn_fullback_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\defaultbg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Chapter\btn_cancel_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Play\btn_jy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Chapter\btn_pause.png" />
+    <Resource Include="Images\Chapter\btn_pause_press.png" />
+    <Resource Include="Images\Chapter\btn_start.png" />
+    <Resource Include="Images\Chapter\btn_start_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Chapter\btn_cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Chapter\btn_cancel_disabled.png" />
+    <Resource Include="Images\Chapter\btn_pause_disabled.png" />
+    <Resource Include="Images\Chapter\btn_start_disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\network_connected.png" />
+    <Resource Include="Images\network_disconnected.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Chapter\error.png" />
+    <Resource Include="Images\Chapter\play.png" />
+    <Resource Include="Images\Chapter\undownload.png" />
+    <Resource Include="Images\Chapter\wait.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Chapter\btn_cancel_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\DownloadClass.Toolkit\DownloadClass.Toolkit.csproj" />
+    <ProjectReference Include="..\Framework\Framework.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\btn_left_hover.png" />
+    <Resource Include="Images\SFPlay\btn_left_normal.png" />
+    <Resource Include="Images\SFPlay\btn_pause_hover.png" />
+    <Resource Include="Images\SFPlay\btn_pause_normal.png" />
+    <Resource Include="Images\SFPlay\btn_play_hover.png" />
+    <Resource Include="Images\SFPlay\btn_play_normal.png" />
+    <Resource Include="Images\SFPlay\btn_right_hover.png" />
+    <Resource Include="Images\SFPlay\btn_right_normal.png" />
+    <Resource Include="Images\SFPlay\btn_sound_hover.png" />
+    <Resource Include="Images\SFPlay\btn_sound_normal.png" />
+    <Resource Include="Images\SFPlay\icon_left_downloaded.png" />
+    <Resource Include="Images\SFPlay\icon_left_nodownload.png" />
+    <Resource Include="Images\SFPlay\playctl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\sound_speed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\nav_left_course_hover.png" />
+    <Resource Include="Images\Main\nav_left_course_normal.png" />
+    <Resource Include="Images\Main\nav_left_question_hover.png" />
+    <Resource Include="Images\Main\nav_left_question_normal.png" />
+    <Resource Include="Images\Main\nav_right_back_hover.png" />
+    <Resource Include="Images\Main\nav_right_back_normal.png" />
+    <Resource Include="Images\Main\nav_right_forward_hover.png" />
+    <Resource Include="Images\Main\nav_right_forward_normal.png" />
+    <Resource Include="Images\Main\nav_left_mobile_hover.png" />
+    <Resource Include="Images\Main\nav_left_mobile_normal.png" />
+    <Resource Include="Images\Main\nav_left_notes_hover.png" />
+    <Resource Include="Images\Main\nav_left_notes_normal.png" />
+    <Resource Include="Images\Main\btn_min_hover.png" />
+    <Resource Include="Images\Main\btn_min_normal.png" />
+    <Resource Include="Images\Main\btn_min_press.png" />
+    <Resource Include="Images\Main\nav_right_import_hover.png" />
+    <Resource Include="Images\Main\nav_right_import_normal.png" />
+    <Resource Include="Images\Main\nav_right_download_hover.png" />
+    <Resource Include="Images\Main\nav_right_download_normal.png" />
+    <Resource Include="Images\Main\nav_right_help_hover.png" />
+    <Resource Include="Images\Main\nav_right_help_normal.png" />
+    <Resource Include="Images\Main\nav_right_news_hover.png" />
+    <Resource Include="Images\Main\nav_right_news_normal.png" />
+    <Resource Include="Images\Main\nav_right_set_hover.png" />
+    <Resource Include="Images\Main\nav_right_set_normal.png" />
+    <Resource Include="Images\Main\nav_right_back_disable.png" />
+    <Resource Include="Images\Main\nav_right_forward_disable.png" />
+    <Resource Include="Images\Play\sound_speed_Hover.png" />
+    <Resource Include="Images\Play\btn_jy_hover.png" />
+    <Resource Include="Images\Push\Close.png" />
+    <Resource Include="Images\btn_close_hover.png" />
+    <Resource Include="Images\btn_close_normal.png" />
+    <Resource Include="Images\btn_close_press.png" />
+    <Resource Include="Images\btn_max_hover.png" />
+    <Resource Include="Images\btn_max_normal.png" />
+    <Resource Include="Images\btn_max_press.png" />
+    <Resource Include="Images\btn_min_hover.png" />
+    <Resource Include="Images\btn_min_normal.png" />
+    <Resource Include="Images\btn_min_press.png" />
+    <Resource Include="Images\btn_normal_hover.png" />
+    <Resource Include="Images\btn_normal_normal.png" />
+    <Resource Include="Images\btn_normal_press.png" />
+    <Resource Include="Images\btn_setting_normal.png" />
+    <Resource Include="Images\btn_setting_hover.png" />
+    <Resource Include="Images\btn_setting_press.png" />
+    <Resource Include="Images\Main\nav_left_faq_hover.png" />
+    <Resource Include="Images\Main\nav_left_faq_normal.png" />
+    <SplashScreen Include="Images\Splash.png" />
+    <Resource Include="Images\Chapter\reload.png" />
+    <Resource Include="Images\Main\nav_left_service_hover.png" />
+    <Resource Include="Images\Main\nav_left_service_normal.png" />
+    <Resource Include="Images\course_select_hover.png" />
+    <Resource Include="Images\course_select_normal.png" />
+    <Resource Include="Images\defaultbg1.png" />
+    <Resource Include="Images\noline.png" />
+    <Resource Include="Images\Paper\updateflag_normal.png" />
+    <Resource Include="Images\DeviceBind\phone.png" />
+    <Resource Include="Images\DeviceBind\verify.png" />
+    <None Include="Rar.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autoupdater.NET.Official" Version="1.6.4" />
+    <PackageReference Include="CommonServiceLocator" Version="2.0.6" />
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.8.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
+    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <PackageReference Include="VideoLAN.LibVLC.Windows" Version="4.0.0-alpha-20210611" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controls\Win32.cs" />
+    <Compile Remove="Logic\StudentFaqLogic.cs" />
+    <Compile Remove="Pages\MobileWin.xaml.cs" />
+    <Compile Remove="Pages\MyQuestionPage.xaml.cs" />
+    <Compile Remove="Pages\SetManagePage.xaml.cs" />
+    <Compile Remove="ViewModel\CwareDownItemViewModel.cs" />
+    <None Remove="Assets\lecture.html" />
+    <None Remove="Assets\logo.png" />
+    <Page Remove="Pages\MobileWin.xaml" />
+    <Page Remove="Pages\MyQuestionPage.xaml" />
+    <Page Remove="Pages\SetManagePage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="MSHTML">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>4</VersionMajor>
+      <Guid>3050f1c5-98b5-11cf-bb82-00aa00bdce0b</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+</Project>

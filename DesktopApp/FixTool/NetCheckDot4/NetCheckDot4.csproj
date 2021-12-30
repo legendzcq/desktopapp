@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A0ADA21C-9782-4C40-A4B0-5A0425844435}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NetCheckDot4</RootNamespace>
+    <AssemblyName>NetCheckDot4</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath />
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NET4</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\NetCheck\Dns\DnsProvider.cs">
+      <Link>Dns\DnsProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Enums.cs">
+      <Link>Dns\Enums.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\InvalidResponseException.cs">
+      <Link>Dns\InvalidResponseException.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\NoResponseException.cs">
+      <Link>Dns\NoResponseException.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Pointer.cs">
+      <Link>Dns\Pointer.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Question.cs">
+      <Link>Dns\Question.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\AAAARecord.cs">
+      <Link>Dns\Records\AAAARecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\ARecord.cs">
+      <Link>Dns\Records\ARecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\CNAMERecord.cs">
+      <Link>Dns\Records\CNAMERecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\DNAMERecord.cs">
+      <Link>Dns\Records\DNAMERecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\HINFORecord.cs">
+      <Link>Dns\Records\HINFORecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\IPSECKEYRecord.cs">
+      <Link>Dns\Records\IPSECKEYRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\LOCRecord.cs">
+      <Link>Dns\Records\LOCRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\MBRecord.cs">
+      <Link>Dns\Records\MBRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\MDRecord.cs">
+      <Link>Dns\Records\MDRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\MFRecord.cs">
+      <Link>Dns\Records\MFRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\MGRecord.cs">
+      <Link>Dns\Records\MGRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\MINFORecord.cs">
+      <Link>Dns\Records\MINFORecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\MRRecord.cs">
+      <Link>Dns\Records\MRRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\MXRecord.cs">
+      <Link>Dns\Records\MXRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\NSRecord.cs">
+      <Link>Dns\Records\NSRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\NullRecord.cs">
+      <Link>Dns\Records\NullRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\PTRRecord.cs">
+      <Link>Dns\Records\PTRRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\RecordBase.cs">
+      <Link>Dns\Records\RecordBase.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\ResourceRecord.cs">
+      <Link>Dns\Records\ResourceRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\SoaRecord.cs">
+      <Link>Dns\Records\SoaRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\SRVRecord.cs">
+      <Link>Dns\Records\SRVRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\SSHFPRecord.cs">
+      <Link>Dns\Records\SSHFPRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\TXTRecord.cs">
+      <Link>Dns\Records\TXTRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Records\WKSRecord.cs">
+      <Link>Dns\Records\WKSRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Request.cs">
+      <Link>Dns\Request.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Resolver.cs">
+      <Link>Dns\Resolver.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Dns\Response.cs">
+      <Link>Dns\Response.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\FormMain.cs">
+      <Link>FormMain.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\NetCheck\FormMain.designer.cs">
+      <Link>FormMain.designer.cs</Link>
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\NetCheck\IPInfo.cs">
+      <Link>IPInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\NetInfo.cs">
+      <Link>NetInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\NetCheck\Program.cs">
+      <Link>Program.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="..\NetCheck\FormMain.resx">
+      <Link>FormMain.resx</Link>
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,93 @@
+﻿<Page x:Class="DesktopApp.Pages.CourseSettingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    mc:Ignorable="d" Background="#FFFFFF"
+    d:DesignHeight="300" d:DesignWidth="500"
+	  FontFamily="{StaticResource BaseFont}"
+	 Title="课程设置">
+	<Page.DataContext>
+		<Binding Path="CourseSetting" Source="{StaticResource Locator}"/>
+	</Page.DataContext>
+	<Page.Resources>
+		<Style TargetType="{x:Type DataGridColumnHeader}" x:Key="CourseSettingHeader">
+			<Setter Property="VerticalContentAlignment" Value="Center" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="DataGridColumnHeader">
+						<Border BorderThickness="1" BorderBrush="{StaticResource DataGridBorderBrush}">
+							<Grid Height="35" Background="{StaticResource DataGridHeaderBrush}">
+								<Grid.Resources>
+									<Style TargetType="TextBlock">
+										<Setter Property="VerticalAlignment" Value="Center"/>
+										<Setter Property="HorizontalAlignment" Value="Center"/>
+										<Setter Property="Foreground" Value="{StaticResource CustomForegroundBrush}"/>
+									</Style>
+								</Grid.Resources>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="5*"/>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="1.5*"/>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								<TextBlock Grid.Column="0" Text="班次名称" FontSize="14" />
+								<Line Grid.Column="1" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+								<TextBlock Grid.Column="2" Grid.ColumnSpan="4"  Text="设置" FontSize="14" />
+							</Grid>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Page.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="auto" />
+		</Grid.RowDefinitions>
+		<DataGrid Background="Transparent" HeadersVisibility="Column" ItemsSource="{Binding CourseSettingList}" ColumnHeaderStyle="{StaticResource CourseSettingHeader}">
+			<DataGrid.Columns>
+				<DataGridTemplateColumn Width="1*" IsReadOnly="True">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="5*"/>
+									<ColumnDefinition Width="1.5*"/>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								<Grid.Resources>
+									<Style TargetType="{x:Type TextBlock}">
+										<Setter Property="VerticalAlignment" Value="Center"/>
+										<Setter Property="HorizontalAlignment" Value="Left"/>
+										<Setter Property="Cursor" Value="Hand"/>
+										<Setter Property="Foreground" Value="{StaticResource CustomForegroundBrush}"/>
+										<Style.Triggers>
+											<Trigger Property="IsMouseOver" Value="true">
+												<Setter Property="TextDecorations" Value="Underline"/>
+												<Setter Property="Foreground" Value="{StaticResource CustomTextHighlightBrush}" />
+											</Trigger>
+										</Style.Triggers>
+									</Style>
+								</Grid.Resources>
+								<TextBlock Text="{Binding CwareName}" Grid.Column="0" />
+                                <CheckBox Grid.Column="1" Content="是否显示" Grid.ColumnSpan="4" HorizontalAlignment="Center" Command="{Binding SetCheckCommand}" IsChecked="{Binding IsShow, Mode=TwoWay}" />
+								<!--<CheckBox Grid.Column="1" Content="是否显示" Command="{Binding SetCheckCommand}" IsChecked="{Binding IsShow, Mode=TwoWay}" />
+								<Button CommandParameter="{Binding}" Command="{Binding CourseSetting.MoveUpCommand, Source={StaticResource Locator}}" Style="{StaticResource NormalBtnStyle}" Content="上移" Grid.Column="2" Width="50" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+								<Button CommandParameter="{Binding}" Command="{Binding CourseSetting.MoveDownCommand, Source={StaticResource Locator}}" Style="{StaticResource NormalBtnStyle}" Content="下移" Grid.Column="3" Width="50" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+								<Button CommandParameter="{Binding}" Command="{Binding CourseSetting.MoveTopCommand, Source={StaticResource Locator}}" Style="{StaticResource NormalBtnStyle}" Content="置顶" Grid.Column="4" Width="50" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
+							</Grid>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+			</DataGrid.Columns>
+		</DataGrid>
+		<Button Command="{Binding SaveSettingCommand}" Grid.Row="1" Style="{StaticResource BigButtonStyle}" Width="100" Height="30" FontSize="16" Content="保存设置" Foreground="#ffffff" HorizontalAlignment="Center" Margin="10"/>
+	</Grid>
+</Page>

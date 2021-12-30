@@ -1,0 +1,27 @@
+﻿<Window x:Class="DesktopApp.Controls.AutoMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ctrl="clr-namespace:DesktopApp.Controls"
+        FontFamily="{StaticResource BaseFont}" 
+		Height="280" Width="450" AllowsTransparency="True" 
+		Background="Transparent" 
+		ResizeMode="NoResize" 
+		ShowInTaskbar="False" 
+		WindowStartupLocation="CenterScreen" 
+		Topmost="True"
+		WindowStyle="None">
+    <Border BorderBrush="#33000000" BorderThickness="6">
+        <Grid Background="White" Margin="0,0,0,-1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Height="30" Background="{StaticResource MainBgBrush}">
+                <TextBlock x:Name="TxtTitle" FontSize="17" Margin="5,0" VerticalAlignment="Center" Text="提示" Foreground="#FFFFFF"/>
+            </Grid>
+            <Image Grid.Row="0" x:Name="ImgClose" Source="/Images/Main/msgbox_close.png" Cursor="Hand" Height="25" Margin="0,0,5,0" HorizontalAlignment="Right"/>
+            <ScrollViewer Margin="20,10,0,0" Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                <TextBlock x:Name="TxtContent" Text="" FontSize="15" TextWrapping="Wrap" Width="382"/>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</Window>

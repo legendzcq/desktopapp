@@ -1,0 +1,50 @@
+﻿<Window x:Class="DesktopApp.Pages.AdvWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:DesktopApp.Controls"
+        Title="广告消息"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        AllowsTransparency="False"
+        Background="Transparent"
+        WindowStyle="None"
+        Width="560"
+        Height="380"
+        Topmost="True">
+    <Border BorderThickness="2"
+            BorderBrush="{StaticResource MainBgBrush}">
+        <Grid Background="#FFFFFF">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid Background="Transparent"
+                  Height="25"
+                  Grid.Row="0">
+                <Border Background="Transparent"
+                        VerticalAlignment="Top"
+                        Height="35"
+                        MouseLeftButtonDown="GridTop_OnMouseLeftButtonDown"
+                        MouseLeftButtonUp="GridTop_OnMouseLeftButtonUp"
+                        MouseMove="GridTop_MouseMove" />
+                <controls:IconButton Kind="WindowClose"
+                                     Width="10"
+                                     Height="10"
+                                     Margin="0,0,10,0"
+                                     HorizontalAlignment="Right"
+                                     VerticalAlignment="Center"
+                                     Click="BtnCloseClick" />
+            </Grid>
+            <WebBrowser x:Name="WebAdv"
+                        Opacity="0"
+                        Grid.Row="1" />
+            <CheckBox x:Name="ckTip"
+                      Content="不再显示此消息"
+                      Grid.Row="2"
+                      Margin="5,5,0,5"
+                      Click="ckTip_Click" />
+        </Grid>
+    </Border>
+</Window>
+

@@ -1,0 +1,13 @@
+﻿<Window x:Class="DesktopApp.Pages.PCDeviceInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="设备信息" Height="335" Width="420"
+	WindowStartupLocation="CenterScreen" 
+	ResizeMode="NoResize"
+        Topmost="True"
+	ShowInTaskbar="False" >
+    <Grid>
+        <!--<Frame x:Name="WebDevice"/>-->
+        <WebBrowser x:Name="WebDevice" Opacity="0"/>
+    </Grid>
+</Window>

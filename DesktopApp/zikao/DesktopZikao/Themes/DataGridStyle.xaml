@@ -1,0 +1,464 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
+
+    <SolidColorBrush x:Key="DataGridBorderBrush" Color="#66EEBA86"/>
+	<SolidColorBrush x:Key="DataGridHeaderBrush" Color="#FFE1F5FF"/>
+    <Color x:Key="DataGridBorderOffset1Color">#66E5CCB3</Color>
+    <Color x:Key="DataGridBorderOffset2Color">#66EEBA86</Color>
+
+    <Style TargetType="DataGrid">
+        <Setter Property="AlternationCount" Value="2" />
+        <Setter Property="HeadersVisibility" Value="None" />
+        <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="SelectionMode" Value="Single" />
+        <Setter Property="GridLinesVisibility" Value="None" />
+        <Setter Property="CanUserAddRows" Value="False" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="EnableRowVirtualization" Value="True" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="CanUserResizeRows" Value="False" />
+        <Setter Property="MinRowHeight" Value="35" />
+    </Style>
+    <!--标题栏样式-->
+    <Style TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridColumnHeader">
+                    <themes:DataGridHeaderBorder x:Name="headerBorder">
+                        <Grid>
+                            <TextBlock Text="{TemplateBinding Content}" 
+                                       VerticalAlignment="Center" 
+                                       HorizontalAlignment="Center" 
+                                       TextWrapping="Wrap"
+                                       Foreground="{StaticResource CustomForegroundBrush}"
+                                       FontWeight="Bold"/>
+                        </Grid>
+                    </themes:DataGridHeaderBorder>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridRow}">
+        <Setter Property="BorderThickness" Value="1,0,1,1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DataGridBorderBrush}"/>
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Style.Triggers>
+            <!--隔行换色-->
+            <Trigger Property="AlternationIndex" Value="0" >
+                <Setter Property="Background" Value="#FFFFFF" />
+            </Trigger>
+            <Trigger Property="AlternationIndex" Value="1" >
+                <Setter Property="Background" Value="#FFFBF5" />
+            </Trigger>
+            <Trigger Property="IsMouseOver"
+                        Value="True">
+                <Setter Property="Background" Value="#FFEFCC"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="DataGridCell">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="#333"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected"
+                        Value="True">
+                <Setter Property="Background" Value="#FFEFCC"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ContentCenterStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="ChapterRowStyle" TargetType="{x:Type DataGridRow}">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                        Value="True">
+                <Setter Property="Background" Value="#FFF8E8"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+	<!--课程列表各列的宽度-->
+	<DataGridLength x:Key="ClassWidth">4*</DataGridLength>
+	<DataGridLength x:Key="TeacherWidth">*</DataGridLength>
+	<DataGridLength x:Key="ClassTypeWidth">*</DataGridLength>
+	<DataGridLength x:Key="ClassFilesWidth">*</DataGridLength>
+	<DataGridLength x:Key="ClassSizeWidth">*</DataGridLength>
+
+	<DataGridLength x:Key="Q1">2*</DataGridLength>
+	<DataGridLength x:Key="Q2">*</DataGridLength>
+	<DataGridLength x:Key="Q3">*</DataGridLength>
+	<DataGridLength x:Key="Q4">*</DataGridLength>
+	<DataGridLength x:Key="Q5">*</DataGridLength>
+	<DataGridLength x:Key="Q6">*</DataGridLength>
+
+	<Style x:Key="CourseTeacherText" TargetType="TextBlock">
+		<Setter Property="Text" Value="老师：" />
+	</Style>
+    <Style x:Key="CYearNameText" TargetType="TextBlock">
+        <Setter Property="Text" Value="类型：" />
+        <Setter Property="Visibility" Value="Hidden" />
+    </Style>
+	
+	<!--课程列表GroupHeaderStyle-->
+    <Style x:Key="CourseListGroupHeaderStyle" TargetType="{x:Type GroupItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel>
+                        <Grid Height="40" VerticalAlignment="Center">
+                            <Image Source="/Images/Course/grid_header_left.png" 
+                                       HorizontalAlignment="Left"
+                                       Height="15" Width="7"/>
+
+                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="20,0,0,0"
+                                               FontSize="17" Foreground="{StaticResource CustomTextHighlightBrush}"/>
+                        </Grid>
+						<Grid Height="35" Background="{StaticResource DataGridHeaderBrush}">
+							<Grid.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="Foreground" Value="{StaticResource CustomForegroundBrush}"/>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="Auto"/>
+
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+							<TextBlock Text="班次"/>
+							<!--<Line Grid.Column="1" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+								<TextBlock Grid.Column="2" Text="老师"/>-->
+							<!--<Line Grid.Column="1" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35"/>
+								<TextBlock Grid.Column="2" Text="类型"/>-->
+							<Line Grid.Column="1" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35"/>
+							<TextBlock Grid.Column="2" Text="文件个数"/>
+							<Line Grid.Column="3" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35"/>
+							<TextBlock Grid.Column="4" Text="累计下载"/>
+						</Grid>
+                        <ItemsPresenter/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+	<Style x:Key="KcjyListGroupHeaderStyle" TargetType="{x:Type GroupItem}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate>
+					<StackPanel>
+						<Grid Height="40" VerticalAlignment="Center">
+							<TextBlock Text="{Binding Name}" Margin="20,0,0,0"  VerticalAlignment="Center" FontSize="17" Foreground="{StaticResource CustomTextHighlightBrush}"/>
+						</Grid>
+						<Border BorderThickness="1" BorderBrush="{StaticResource DataGridBorderBrush}">
+							<Grid Height="35" Background="{StaticResource DataGridHeaderBrush}">
+								<Grid.Resources>
+									<Style TargetType="TextBlock">
+										<Setter Property="VerticalAlignment" Value="Center"/>
+										<Setter Property="HorizontalAlignment" Value="Center"/>
+										<Setter Property="Foreground" Value="{StaticResource CustomForegroundBrush}"/>
+									</Style>
+								</Grid.Resources>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="4*"/>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="*"/>
+									<!--<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="*"/>-->
+								</Grid.ColumnDefinitions>
+								<TextBlock Text="班次"/>
+								<!--<Line Grid.Column="1" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+								<TextBlock Grid.Column="2" Text="老师"/>
+								<Line Grid.Column="3" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35"/>
+								<TextBlock Grid.Column="4" Text="类型"/>-->
+								<Line Grid.Column="1" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35"/>
+								<TextBlock Grid.Column="2" Text="讲义下载"/>
+							</Grid>
+						</Border>
+						<ItemsPresenter/>
+					</StackPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="MobileDownGroupHeaderStyle" TargetType="{x:Type GroupItem}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate>
+					<StackPanel>
+						<Grid Height="40" VerticalAlignment="Center">
+							<TextBlock Text="{Binding Name}" Margin="20,0,0,0"  VerticalAlignment="Center" FontSize="17" Foreground="{StaticResource CustomTextHighlightBrush}"/>
+						</Grid>
+						<Border BorderThickness="1" BorderBrush="{StaticResource DataGridBorderBrush}">
+							<Grid Height="35" Background="{StaticResource DataGridHeaderBrush}">
+								<Grid.Resources>
+									<Style TargetType="TextBlock">
+										<Setter Property="VerticalAlignment" Value="Center"/>
+										<Setter Property="HorizontalAlignment" Value="Center"/>
+										<Setter Property="Foreground" Value="{StaticResource CustomForegroundBrush}"/>
+									</Style>
+								</Grid.Resources>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="4*"/>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="*"/>
+									<!--<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="*"/>-->
+								</Grid.ColumnDefinitions>
+								<TextBlock Text="班次"/>
+								<Line Grid.Column="1" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+								<!--<TextBlock Grid.Column="2" Text="老师"/>
+								<Line Grid.Column="3" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35"/>
+								<TextBlock Grid.Column="4" Text="类型"/>-->
+								<Line Grid.Column="1" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35"/>
+								<TextBlock Grid.Column="2" Text="手机视频"/>
+								<Line Grid.Column="3" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35"/>
+								<TextBlock Grid.Column="4" Text="手机音频"/>
+								<Line Grid.Column="5" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35"/>
+								<TextBlock Grid.Column="6" Text="高清平板视频"/>
+								<!--<Line Grid.Column="11" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35"/>
+								<TextBlock Grid.Column="12" Text="高清音频"/>-->
+							</Grid>
+						</Border>
+						<ItemsPresenter/>
+					</StackPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="CenterListGroupHeaderStyle" TargetType="{x:Type GroupItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel>
+                        <Grid Height="40" VerticalAlignment="Center">
+                            <Image Source="/Images/Course/grid_header_left.png" 
+                                       HorizontalAlignment="Left"
+                                       Height="15" Width="7"/>
+
+                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="20,0,0,0"
+                                               FontSize="17" Foreground="{StaticResource CustomTextHighlightBrush}"/>
+                        </Grid>
+						<Grid Height="35" Background="{StaticResource DataGridHeaderBrush}">
+							<Grid.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="Foreground" Value="{StaticResource CustomForegroundBrush}"/>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+							<TextBlock Text="练习类型"/>
+							<Line Grid.Column="1" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+							<TextBlock Grid.Column="2" Text="做题正确率"/>
+							<Line Grid.Column="3" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+							<TextBlock Grid.Column="4" Text="已做题量"/>
+							<Line Grid.Column="5" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+							<TextBlock Grid.Column="6" Text="错题中心"/>
+							<Line Grid.Column="7" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+							<TextBlock Grid.Column="8" Text="题库收藏夹"/>
+							<Line Grid.Column="9" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+							<TextBlock Grid.Column="10" Text="更新题库"/>
+						</Grid>
+                        <ItemsPresenter/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+	</Style>
+	
+	<!--<Style TargetType="{x:Type DataGridColumnHeader}" x:Key="PaperListColumnHeaderStyle">
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="DataGridColumnHeader">
+					<Border BorderThickness="1" BorderBrush="{StaticResource DataGridBorderBrush}">
+						<Grid Height="35" Background="{StaticResource DataGridHeaderBrush}">
+							<Grid.Resources>
+								<Style TargetType="TextBlock">
+									<Setter Property="VerticalAlignment" Value="Center"/>
+									<Setter Property="HorizontalAlignment" Value="Center"/>
+									<Setter Property="Foreground" Value="{StaticResource CustomForegroundBrush}"/>
+								</Style>
+							</Grid.Resources>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="3*"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<TextBlock Text="试卷名称" FontSize="14"/>
+							<Line Grid.Column="1" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+							<TextBlock Grid.Column="2" Text="全部"/>
+							<Line Grid.Column="3" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+							<TextBlock Grid.Column="4" Text="未做"/>
+							<Line Grid.Column="5" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+							<TextBlock Grid.Column="6" Text="错题"/>
+							<Line Grid.Column="7" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+							<TextBlock Grid.Column="8" Text="收藏"/>
+						</Grid>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>-->
+
+	<Style TargetType="{x:Type DataGridColumnHeader}" x:Key="KcjyListColumnHeaderStyle">
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="DataGridColumnHeader">
+					<Border BorderThickness="1" BorderBrush="{StaticResource DataGridBorderBrush}">
+						<Grid Height="35" Background="{StaticResource DataGridHeaderBrush}">
+							<Grid.Resources>
+								<Style TargetType="TextBlock">
+									<Setter Property="VerticalAlignment" Value="Center"/>
+									<Setter Property="HorizontalAlignment" Value="Center"/>
+									<Setter Property="Foreground" Value="{StaticResource CustomForegroundBrush}"/>
+								</Style>
+							</Grid.Resources>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="5*"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<TextBlock Text="课程章节" FontSize="14"/>
+							<Line Grid.Column="1" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+							<TextBlock Grid.Column="2" Text="查看讲义"/>
+						</Grid>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+    <Style TargetType="{x:Type DataGridColumnHeader}" x:Key="PaperListColumnHeaderStyle">
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridColumnHeader">
+                    <Border BorderThickness="1" BorderBrush="{StaticResource DataGridBorderBrush}">
+                        <Grid Height="35" Background="{StaticResource DataGridHeaderBrush}">
+                            <Grid.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="Foreground" Value="{StaticResource CustomForegroundBrush}"/>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="试卷名称" FontSize="14"/>
+                            <Line Grid.Column="1" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+                            <TextBlock Grid.Column="2" Text="全部"/>
+                            <Line Grid.Column="3" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+                            <TextBlock Grid.Column="4" Text="未做"/>
+                            <Line Grid.Column="5" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+                            <TextBlock Grid.Column="6" Text="错题"/>
+                            <Line Grid.Column="7" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+                            <TextBlock Grid.Column="8" Text="收藏"/>
+                            <Line Grid.Column="9" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+                            <TextBlock Grid.Column="10" Text="做题结果"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--做题结果GroupHeaderStyle-->
+    <Style TargetType="{x:Type DataGridColumnHeader}" x:Key="PaperSocresListColumnHeaderStyle">
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridColumnHeader">
+                    <Border BorderThickness="1" BorderBrush="{StaticResource DataGridBorderBrush}">
+                        <Grid Height="35" Background="{StaticResource DataGridHeaderBrush}">
+                            <Grid.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="Foreground" Value="{StaticResource CustomForegroundBrush}"/>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="做题日期" FontSize="14"/>
+                            <Line Grid.Column="1" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+                            <TextBlock Grid.Column="2" Text="用时/秒"/>
+                            <Line Grid.Column="3" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+                            <TextBlock Grid.Column="4" Text="总得分"/>
+                            <Line Grid.Column="5" Stroke="{StaticResource DataGridBorderBrush}" X1="0" X2="0" Y1="0" Y2="35" />
+                            <TextBlock Grid.Column="6" Text="操作"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

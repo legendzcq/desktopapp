@@ -1,0 +1,319 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="clr-namespace:DesktopApp.Controls"
+      x:Class="DesktopApp.Pages.CoursePage"
+      mc:Ignorable="d"
+      d:DesignHeight="600"
+      d:DesignWidth="600"
+      FontSize="14"
+      FontFamily="{StaticResource BaseFont}"
+      KeepAlive="True">
+    <Page.DataContext>
+        <Binding Path="Course"
+                 Source="{StaticResource Locator}" />
+    </Page.DataContext>
+    <Page.Resources>
+        <Style x:Key="LeftSemiCircleButtonStyle"
+               TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="5,0,0,5"
+                                BorderThickness="1"
+                                BorderBrush="#0A8CE0">
+                            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ShowFreeCourse}"
+                             Value="True">
+                    <Setter Property="Foreground"
+                            Value="#0A8CE0" />
+                    <Setter Property="Background"
+                            Value="White" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ShowFreeCourse}"
+                             Value="False">
+                    <Setter Property="Foreground"
+                            Value="White" />
+                    <Setter Property="Background"
+                            Value="#0A8CE0" />
+                </DataTrigger>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Cursor"
+                            Value="Hand" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="RightSemiCircleButtonStyle"
+               TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="0,5,5,0"
+                                BorderThickness="1"
+                                BorderBrush="#0A8CE0">
+                            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ShowFreeCourse}"
+                             Value="True">
+                    <Setter Property="Foreground"
+                            Value="White" />
+                    <Setter Property="Background"
+                            Value="#0A8CE0" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ShowFreeCourse}"
+                             Value="False">
+                    <Setter Property="Foreground"
+                            Value="#0A8CE0" />
+                    <Setter Property="Background"
+                            Value="White" />
+                </DataTrigger>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Cursor"
+                            Value="Hand" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="CourseListGroupHeaderStyle"
+               TargetType="{x:Type GroupItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        Height="40"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Name}"
+                                           Margin="20,0,0,0"
+                                           VerticalAlignment="Center"
+                                           FontSize="17"
+                                           Foreground="{StaticResource CustomTextHighlightBrush}" />
+                                <TextBlock Text="班次设置"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Margin="20,0,0,0"
+                                           Style="{StaticResource LinkTextStyle}">
+                                     <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                                            <i:InvokeCommandAction Command="{Binding Course.CourseSettingCommand,Source={StaticResource Locator}}"
+                                                                   CommandParameter="{Binding Name}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBlock>
+                            </StackPanel>
+                            <Border BorderThickness="1"
+                                    BorderBrush="{StaticResource DataGridBorderBrush}">
+                                <Grid Height="35"
+                                      Background="{StaticResource DataGridHeaderBrush}">
+                                    <Grid.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment"
+                                                    Value="Center" />
+                                            <Setter Property="HorizontalAlignment"
+                                                    Value="Center" />
+                                            <Setter Property="Foreground"
+                                                    Value="{StaticResource CustomForegroundBrush}" />
+                                        </Style>
+                                    </Grid.Resources>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="班次" />
+                                    <Line Grid.Column="1"
+                                          Stroke="{StaticResource DataGridBorderBrush}"
+                                          X1="0"
+                                          X2="0"
+                                          Y1="0"
+                                          Y2="35" />
+                                    <TextBlock Grid.Column="2"
+                                               Text="文件个数" />
+                                    <Line Grid.Column="3"
+                                          Stroke="{StaticResource DataGridBorderBrush}"
+                                          X1="0"
+                                          X2="0"
+                                          Y1="0"
+                                          Y2="35" />
+                                    <TextBlock Grid.Column="4"
+                                               Text="累计下载" />
+                                </Grid>
+                            </Border>
+                            <ItemsPresenter />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <DataGrid x:Name="DgData"
+                  Background="Transparent"
+                  SelectedIndex="-1"
+                  ItemsSource="{Binding CourseList}">
+            <DataGrid.GroupStyle>
+                <GroupStyle ContainerStyle="{StaticResource CourseListGroupHeaderStyle}">
+                    <GroupStyle.Panel>
+                        <ItemsPanelTemplate>
+                            <DataGridRowsPresenter />
+                        </ItemsPanelTemplate>
+                    </GroupStyle.Panel>
+                </GroupStyle>
+            </DataGrid.GroupStyle>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="班次"
+                                        IsReadOnly="True"
+                                        Width="{StaticResource ClassWidth}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5,5,5,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <controls:ImageButton Grid.RowSpan="2"
+                                                      Style="{StaticResource PlayIconButtonStyle}"
+                                                      HorizontalAlignment="Right"
+                                                      Command="{Binding Course.NavChapterCommand, Source={StaticResource Locator}}"
+                                                      CommandParameter="{Binding}" />
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="1"
+                                           ToolTip="{Binding CourseWareName}"
+                                           Text="{Binding CourseWareName}"
+                                           Style="{StaticResource LinkTextStyle}"
+                                           HorizontalAlignment="Left">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                                            <i:InvokeCommandAction Command="{Binding Course.NavChapterCommand, Source={StaticResource Locator}}"
+                                                                   CommandParameter="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:DataTrigger Binding="{Binding IsOpen}"
+                                                       Value="False">
+                                            <i:ChangePropertyAction PropertyName="Foreground"
+                                                                    Value="#666" />
+                                            <i:ChangePropertyAction PropertyName="ToolTip"
+                                                                    Value="未开通" />
+                                        </i:DataTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBlock>
+                                <Grid Margin="5,5,0,0"
+                                      Grid.Row="1"
+                                      Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="3.5*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0"
+                                               Style="{StaticResource CourseTeacherText}"
+                                               FontSize="12" />
+                                    <TextBlock Grid.Column="1"
+                                               Text="{Binding CTeacherName}"
+                                               FontSize="12" />
+                                    <TextBlock Grid.Column="2"
+                                               Style="{StaticResource CYearNameText}"
+                                               FontSize="12" />
+                                    <TextBlock Grid.Column="3"
+                                               Style="{StaticResource CYearNameText}"
+                                               Text="{Binding CYearName}"
+                                               FontSize="12" />
+
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="文件个数"
+                                    ElementStyle="{StaticResource ContentCenterStyle}"
+                                    Binding="{Binding FileCount}"
+                                    FontSize="12"
+                                    IsReadOnly="True"
+                                    Width="{StaticResource ClassFilesWidth}" />
+                <DataGridTextColumn Header="占用空间"
+                                    ElementStyle="{StaticResource ContentCenterStyle}"
+                                    Binding="{Binding FileSizes}"
+                                    FontSize="12"
+                                    IsReadOnly="True"
+                                    Width="{StaticResource ClassSizeWidth}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <!-- 暂时隐藏课程分类功能
+        <Button Content="已购课程"
+                Margin="0,5,400,0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Width="100"
+                Height="25"
+                Click="PurchaseCwareButton_Click"
+                Style="{StaticResource LeftSemiCircleButtonStyle}">
+        </Button>
+        <Button Content="赠送课程"
+                Margin="0,5,300,5"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Width="100"
+                Height="25"
+                Click="FreeCwareButton_Click"
+                Style="{StaticResource RightSemiCircleButtonStyle}" />
+        -->
+        <Button VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Height="30"
+                Width="70"
+                Margin="0,0,20,0"
+                Command="{Binding RefreshCommand}"
+                Style="{DynamicResource BigButtonStyle}">
+            <TextBlock Foreground="White"
+                       FontSize="15"
+                       Text="更新列表" />
+        </Button>
+        <Button VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Height="30"
+                Width="70"
+                Margin="0,0,100,0"
+                Command="{Binding CourseRecordCommand}"
+                Style="{DynamicResource BigButtonStyle}">
+            <TextBlock Foreground="White"
+                       FontSize="15"
+                       Text="听课记录" />
+        </Button>
+        <Image x:Name="ImgDefalt"
+               Source="/Images/defaultbg1.png"
+               Width="400"
+               Visibility="{Binding IsShowNoData, Converter={StaticResource Bool2Visibility}}" />
+        <Button Content="去选课"
+                FontSize="16"
+                Style="{StaticResource NormalBtnStyle}"
+                Visibility="{Binding IsShowNoData, Converter={StaticResource Bool2Visibility}}"
+                Width="101"
+                Height="29"
+                Margin="0,200,0,0"
+                Click="btnSelectCourse_Click" />
+        <!--Loading-->
+        <controls:CircularProgressBar Visibility="{Binding IsShowLoading, Converter={StaticResource Bool2Visibility}}" />
+    </Grid>
+</Page>

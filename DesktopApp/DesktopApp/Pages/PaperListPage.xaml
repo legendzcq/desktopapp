@@ -1,0 +1,160 @@
+﻿<Page x:Class="DesktopApp.Pages.PaperListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:ctrl="clr-namespace:DesktopApp.Controls"
+      mc:Ignorable="d"
+      FontFamily="{StaticResource BaseFont}"
+      d:DesignHeight="300"
+      d:DesignWidth="600"
+      DataContext="{Binding Source={StaticResource Locator},Path=PaperList}"
+      KeepAlive="True">
+    <Page.Resources>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid Height="37"
+                  ColumnSpan="2"
+                  VerticalAlignment="Top">
+                <TextBlock x:Name="PageTitle"
+                           Text="{Binding PageTitle}"
+                           Style="{StaticResource PageTitleStyle}" />
+            </Grid>
+            <Button Grid.Column="1"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Height="30"
+                    Width="120"
+                    Margin="0,0,20,0"
+                    Command="{Binding RefreshCommand}"
+                    Style="{DynamicResource BigButtonStyle}">
+                <TextBlock Foreground="White"
+                           FontSize="17"
+                           Text="更新题库" />
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <!-- 查看下载课程DataGrid -->
+            <DataGrid x:Name="DgData"
+                      Background="Transparent"
+                      HeadersVisibility="Column"
+                      ItemsSource="{Binding Papers}"
+                      ColumnHeaderStyle="{StaticResource PaperListColumnHeaderStyle}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="1*"
+                                            IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.Resources>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="VerticalAlignment"
+                                                    Value="Center" />
+                                            <Setter Property="HorizontalAlignment"
+                                                    Value="Center" />
+                                            <Setter Property="Cursor"
+                                                    Value="Hand" />
+                                            <Setter Property="Foreground"
+                                                    Value="{StaticResource CustomForegroundBrush}" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver"
+                                                         Value="true">
+                                                    <Setter Property="TextDecorations"
+                                                            Value="Underline" />
+                                                    <Setter Property="Foreground"
+                                                            Value="{StaticResource CustomTextHighlightBrush}" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Resources>
+                                    <TextBlock x:Name="TxtTitle"
+                                               Grid.Column="0"
+                                               Text="{Binding PaperViewName}"
+                                               Style="{StaticResource LinkTextStyle}"
+                                               ToolTip="{Binding PaperViewName}"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Margin="20,0,0,0" />
+                                    <TextBlock x:Name="TxtAll"
+                                               Grid.Column="1"
+                                               Text="{Binding AllCnt}"
+                                               ToolTip="{Binding AllCnt}" />
+                                    <TextBlock x:Name="TxtDo"
+                                               Grid.Column="2"
+                                               Text="{Binding DoCnt}"
+                                               ToolTip="{Binding DoCnt}" />
+                                    <TextBlock x:Name="TxtWrong"
+                                               Grid.Column="3"
+                                               Text="{Binding WrongCnt}"
+                                               ToolTip="{Binding WrongCnt}" />
+                                    <TextBlock x:Name="TxtFav"
+                                               Grid.Column="4"
+                                               Text="{Binding FavCnt}"
+                                               ToolTip="{Binding FavCnt}" />
+                                    <TextBlock x:Name="TxtResult"
+                                               Grid.Column="5"
+                                               Text="查看"
+                                               ToolTip="做题结果" />
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown"
+                                                        SourceName="TxtTitle">
+                                            <i:InvokeCommandAction Command="{Binding PaperList.NavPaperCommand, Source={StaticResource Locator}}"
+                                                                   CommandParameter="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown"
+                                                        SourceName="TxtAll">
+                                            <i:InvokeCommandAction Command="{Binding PaperList.NavPaperCommand, Source={StaticResource Locator}}"
+                                                                   CommandParameter="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown"
+                                                        SourceName="TxtDo">
+                                            <i:InvokeCommandAction Command="{Binding PaperList.NavPaperDoCommand, Source={StaticResource Locator}}"
+                                                                   CommandParameter="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown"
+                                                        SourceName="TxtFav">
+                                            <i:InvokeCommandAction Command="{Binding PaperList.NavPaperFavCommand, Source={StaticResource Locator}}"
+                                                                   CommandParameter="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown"
+                                                        SourceName="TxtWrong">
+                                            <i:InvokeCommandAction Command="{Binding PaperList.NavPaperWrongCommand, Source={StaticResource Locator}}"
+                                                                   CommandParameter="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown"
+                                                        SourceName="TxtResult">
+                                            <i:InvokeCommandAction Command="{Binding PaperList.NavPaperResultCommand, Source={StaticResource Locator}}"
+                                                                   CommandParameter="{Binding}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <ctrl:CircularProgressBar Grid.Row="0"
+                                  Grid.RowSpan="2"
+                                  Visibility="{Binding IsShowLoading,Converter={StaticResource Bool2Visibility}}" />
+    </Grid>
+</Page>

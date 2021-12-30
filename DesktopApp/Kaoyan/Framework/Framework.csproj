@@ -1,0 +1,559 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B7758377-D4C2-46EF-862A-F9A99549B6F5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Framework</RootNamespace>
+    <AssemblyName>Framework</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath />
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;KAOYAN</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;KAOYAN</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bdev.Net.Dns">
+      <HintPath>..\..\packages\Bdev.Net.Dns.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\packages\System.Data.SQLite.1.0.88.0\lib\net40\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq">
+      <HintPath>..\..\packages\System.Data.SQLite.1.0.88.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Framework\Download\DownloadBlock.cs">
+      <Link>Download\DownloadBlock.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Download\DownloadBuffer.cs">
+      <Link>Download\DownloadBuffer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Download\DownloadComplateEventArgs.cs">
+      <Link>Download\DownloadComplateEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Download\Downloader.cs">
+      <Link>Download\Downloader.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Download\DownloadEventArgs.cs">
+      <Link>Download\DownloadEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Download\DownloadProcessEventArgs.cs">
+      <Link>Download\DownloadProcessEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Download\IDownloader.cs">
+      <Link>Download\IDownloader.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Download\MultiBlockDownloader.cs">
+      <Link>Download\MultiBlockDownloader.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Download\UpdateFile.cs">
+      <Link>Download\UpdateFile.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Download\Updater.cs">
+      <Link>Download\Updater.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Import\Helper.cs">
+      <Link>Import\Helper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Import\ImportZip.cs">
+      <Link>Import\ImportZip.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Local\Baseinfo.cs">
+      <Link>Local\Baseinfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Local\DataAccessBase.cs">
+      <Link>Local\DataAccessBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Local\DatabaseUpdate.cs">
+      <Link>Local\DatabaseUpdate.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Local\StudentData.cs">
+      <Link>Local\StudentData.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Local\StudentQuestionData.cs">
+      <Link>Local\StudentQuestionData.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Local\StudentWareData.cs">
+      <Link>Local\StudentWareData.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\HttpHost.cs">
+      <Link>Model\HttpHost.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\RemoteLogin.cs">
+      <Link>Model\RemoteLogin.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\ReturnItem.cs">
+      <Link>Model\ReturnItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentCenter.cs">
+      <Link>Model\StudentCenter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentChapter.cs">
+      <Link>Model\StudentChapter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentChapterList.cs">
+      <Link>Model\StudentChapterList.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentClassName.cs">
+      <Link>Model\StudentClassName.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentCourse.cs">
+      <Link>Model\StudentCourse.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentCourseDetail.cs">
+      <Link>Model\StudentCourseDetail.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentCourseWare.cs">
+      <Link>Model\StudentCourseWare.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentCwareChapter.cs">
+      <Link>Model\StudentCwareChapter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentCWareDown.cs">
+      <Link>Model\StudentCWareDown.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentCwareDownload.cs">
+      <Link>Model\StudentCwareDownload.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentCwareKcjy.cs">
+      <Link>Model\StudentCwareKcjy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentIEnumerableList.cs">
+      <Link>Model\StudentIEnumerableList.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentInfo.cs">
+      <Link>Model\StudentInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentPaper.cs">
+      <Link>Model\StudentPaper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentPaperPart.cs">
+      <Link>Model\StudentPaperPart.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentPaperView.cs">
+      <Link>Model\StudentPaperView.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentQuestion.cs">
+      <Link>Model\StudentQuestion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentQuestionOption.cs">
+      <Link>Model\StudentQuestionOption.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentQuestionType.cs">
+      <Link>Model\StudentQuestionType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentSiteCourse.cs">
+      <Link>Model\StudentSiteCourse.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\StudentTimeNode.cs">
+      <Link>Model\StudentTimeNode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\ViewCourseRecord.cs">
+      <Link>Model\ViewCourseRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\ViewStudentCenter.cs">
+      <Link>Model\ViewStudentCenter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\ViewStudentCourseWare.cs">
+      <Link>Model\ViewStudentCourseWare.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\ViewStudentCwareDown.cs">
+      <Link>Model\ViewStudentCwareDown.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\ViewStudentCwareDownLoad.cs">
+      <Link>Model\ViewStudentCwareDownLoad.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\ViewStudentCwareSetting.cs">
+      <Link>Model\ViewStudentCwareSetting.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\ViewStudentPaper.cs">
+      <Link>Model\ViewStudentPaper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\ViewStudentQuestion.cs">
+      <Link>Model\ViewStudentQuestion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\ViewStudentQuestionRecord.cs">
+      <Link>Model\ViewStudentQuestionRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\ViewStudentQuestionResult.cs">
+      <Link>Model\ViewStudentQuestionResult.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\ViewStudentWareDetail.cs">
+      <Link>Model\ViewStudentWareDetail.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Model\ZipConfig.cs">
+      <Link>Model\ZipConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\NewModel\MarqueeInfoItem.cs">
+      <Link>NewModel\MarqueeInfoItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\NewModel\OffLineTimeReturnItem.cs">
+      <Link>NewModel\OffLineTimeReturnItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\NewModel\PointTestQuestion.cs">
+      <Link>NewModel\PointTestQuestion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\NewModel\PointTestStartTime.cs">
+      <Link>NewModel\PointTestStartTime.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\NewModel\RemoteReturnItem.cs">
+      <Link>NewModel\RemoteReturnItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\NewModel\StudentCourse.cs">
+      <Link>NewModel\StudentCourse.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\NewModel\StudentPaperCenter.cs">
+      <Link>NewModel\StudentPaperCenter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\NewModel\StudentQuestionRecord.cs">
+      <Link>NewModel\StudentQuestionRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\NewModel\StudentUserData.cs">
+      <Link>NewModel\StudentUserData.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\NewModel\StudentVideoRecord.cs">
+      <Link>NewModel\StudentVideoRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\NewModel\StudentWareKcjyDown.cs">
+      <Link>NewModel\StudentWareKcjyDown.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\NewModel\StudentWareList.cs">
+      <Link>NewModel\StudentWareList.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\NewModel\SubjectClassify.cs">
+      <Link>NewModel\SubjectClassify.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\NewModel\Token.cs">
+      <Link>NewModel\Token.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\AMMediaType.cs">
+      <Link>Player\DShow\AMMediaType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\AMPropertyPin.cs">
+      <Link>Player\DShow\AMPropertyPin.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\AMSeekingSeekingCapabilities.cs">
+      <Link>Player\DShow\AMSeekingSeekingCapabilities.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\AMSeekingSeekingFlags.cs">
+      <Link>Player\DShow\AMSeekingSeekingFlags.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\DsError.cs">
+      <Link>Player\DShow\DsError.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\DsFindPin.cs">
+      <Link>Player\DShow\DsFindPin.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\DsGuid.cs">
+      <Link>Player\DShow\DsGuid.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\DsLong.cs">
+      <Link>Player\DShow\DsLong.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\DsMarshaler.cs">
+      <Link>Player\DShow\DsMarshaler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\DSoundRender.cs">
+      <Link>Player\DShow\DSoundRender.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\DsResults.cs">
+      <Link>Player\DShow\DsResults.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\DsUtils.cs">
+      <Link>Player\DShow\DsUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\EMTMarshaler.cs">
+      <Link>Player\DShow\EMTMarshaler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\EventCode.cs">
+      <Link>Player\DShow\EventCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\FilterGraph.cs">
+      <Link>Player\DShow\FilterGraph.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\FilterInfo.cs">
+      <Link>Player\DShow\FilterInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\FilterState.cs">
+      <Link>Player\DShow\FilterState.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\FindDirection.cs">
+      <Link>Player\DShow\FindDirection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IBaseFilter.cs">
+      <Link>Player\DShow\IBaseFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IBasicAudio.cs">
+      <Link>Player\DShow\IBasicAudio.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IBasicVideo.cs">
+      <Link>Player\DShow\IBasicVideo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IEnumFilters.cs">
+      <Link>Player\DShow\IEnumFilters.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IEnumMediaTypes.cs">
+      <Link>Player\DShow\IEnumMediaTypes.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IEnumPins.cs">
+      <Link>Player\DShow\IEnumPins.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IFilterGraph.cs">
+      <Link>Player\DShow\IFilterGraph.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IGraphBuilder.cs">
+      <Link>Player\DShow\IGraphBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IKsPropertySet.cs">
+      <Link>Player\DShow\IKsPropertySet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IMediaControl.cs">
+      <Link>Player\DShow\IMediaControl.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IMediaEvent.cs">
+      <Link>Player\DShow\IMediaEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IMediaEventEx.cs">
+      <Link>Player\DShow\IMediaEventEx.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IMediaFilter.cs">
+      <Link>Player\DShow\IMediaFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IMediaPosition.cs">
+      <Link>Player\DShow\IMediaPosition.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IMediaSeeking.cs">
+      <Link>Player\DShow\IMediaSeeking.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IPersist.cs">
+      <Link>Player\DShow\IPersist.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IPin.cs">
+      <Link>Player\DShow\IPin.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IReferenceClock.cs">
+      <Link>Player\DShow\IReferenceClock.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\IVideoWindow.cs">
+      <Link>Player\DShow\IVideoWindow.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\KSPropertySupport.cs">
+      <Link>Player\DShow\KSPropertySupport.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\NotifyFlags.cs">
+      <Link>Player\DShow\NotifyFlags.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\OABool.cs">
+      <Link>Player\DShow\OABool.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\PinCategory.cs">
+      <Link>Player\DShow\PinCategory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\PinConnectedStatus.cs">
+      <Link>Player\DShow\PinConnectedStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\PinDirection.cs">
+      <Link>Player\DShow\PinDirection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\PinInfo.cs">
+      <Link>Player\DShow\PinInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\PropSetID.cs">
+      <Link>Player\DShow\PropSetID.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\WindowState.cs">
+      <Link>Player\DShow\WindowState.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\WindowStyle.cs">
+      <Link>Player\DShow\WindowStyle.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\DShow\WindowStyleEx.cs">
+      <Link>Player\DShow\WindowStyleEx.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Player\PlayerCore.cs">
+      <Link>Player\PlayerCore.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Framework\Push\BasePackage.cs">
+      <Link>Push\BasePackage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Push\HeartBeatPackage.cs">
+      <Link>Push\HeartBeatPackage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Push\HeartBeatReturnPackage.cs">
+      <Link>Push\HeartBeatReturnPackage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Push\PushClient.cs">
+      <Link>Push\PushClient.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Push\PushedPackage.cs">
+      <Link>Push\PushedPackage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Push\PushLinkMessage.cs">
+      <Link>Push\PushLinkMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Push\PushMessage.cs">
+      <Link>Push\PushMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Push\QueryPackage.cs">
+      <Link>Push\QueryPackage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Push\UdpPackage.cs">
+      <Link>Push\UdpPackage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Remote\DownLoadImg.cs">
+      <Link>Remote\DownLoadImg.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Remote\Interface.cs">
+      <Link>Remote\Interface.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Remote\RemoteBase.cs">
+      <Link>Remote\RemoteBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Remote\StudentQuestionRemote.cs">
+      <Link>Remote\StudentQuestionRemote.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Remote\StudentRemote.cs">
+      <Link>Remote\StudentRemote.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Remote\StudentWareRemote.cs">
+      <Link>Remote\StudentWareRemote.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Remote\TakenRemote.cs">
+      <Link>Remote\TakenRemote.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Remote\WebProxyClient.cs">
+      <Link>Remote\WebProxyClient.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Framework\Utility\Crypt.cs">
+      <Link>Utility\Crypt.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Utility\FullScreenManager.cs">
+      <Link>Utility\FullScreenManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Utility\InterfaceConfig.cs">
+      <Link>Utility\InterfaceConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Utility\Log.cs">
+      <Link>Utility\Log.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Utility\NativeMethod.cs">
+      <Link>Utility\NativeMethod.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Utility\Network.cs">
+      <Link>Utility\Network.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Utility\SimpleHttpServer.cs">
+      <Link>Utility\SimpleHttpServer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Utility\SystemInfo.cs">
+      <Link>Utility\SystemInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Utility\SystemMultimediaController.cs">
+      <Link>Utility\SystemMultimediaController.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Utility\Util.cs">
+      <Link>Utility\Util.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Utility\WindowResizer.cs">
+      <Link>Utility\WindowResizer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Framework\Utility\XElementExtensions.cs">
+      <Link>Utility\XElementExtensions.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="x64\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

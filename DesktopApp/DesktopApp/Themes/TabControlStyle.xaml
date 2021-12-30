@@ -1,0 +1,359 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:DesktopApp.Controls">
+	<Style x:Key="MainTabStyle" TargetType="{x:Type TabControl}">
+		<Setter Property="OverridesDefaultStyle" Value="True" />
+		<Setter Property="TabStripPlacement" Value="Left" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type TabControl}">
+					<Grid ClipToBounds="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="Local">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="149" />
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition x:Name="RowDefinition1" Height="*"/>
+						</Grid.RowDefinitions>
+						<TabPanel x:Name="HeaderPanel" Grid.Column="0" IsItemsHost="True" Margin="0,38,0,0" Grid.Row="0" KeyboardNavigation.TabIndex="1"/>
+						<Grid x:Name="ContentPanel" Background="{TemplateBinding Background}" Grid.Column="1" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="0" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
+							<ContentPresenter ContentSource="SelectedContent" KeyboardNavigation.DirectionalNavigation="Contained" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local"/>
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="MyCourseTabItemStyle" TargetType="{x:Type TabItem}">
+		<Setter Property="FocusVisualStyle" Value="{x:Null}" />
+		<Setter Property="Foreground" Value="#ffffffff"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type TabItem}">
+					<Grid Height="43">
+						<Border CornerRadius="5" x:Name="Bd" Background="{TemplateBinding Background}" Height="33" Width="129">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="38" />
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								<Image x:Name="ImageStart" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Right" Source="/Images/Main/nav_left_course_normal.png" Width="16" Height="16" />
+								<ContentPresenter Grid.Column="1" Margin="5,0,0,0"
+											x:Name="Content" 
+											ContentTemplate="{TemplateBinding HeaderTemplate}" 
+											Content="{TemplateBinding Header}" 
+											ContentStringFormat="{TemplateBinding HeaderStringFormat}" 
+											ContentSource="Header" 
+											HorizontalAlignment="Left" 
+											RecognizesAccessKey="True" TextBlock.FontSize="14"
+											VerticalAlignment="Center"/>
+							</Grid>
+						</Border>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsSelected" Value="True">
+							<Setter Property="Background" TargetName="Bd">
+								<Setter.Value>
+									<SolidColorBrush Color="{StaticResource FocusBgColor}" />
+								</Setter.Value>
+							</Setter>
+							<Setter TargetName="Content" Property="TextBlock.Foreground">
+								<Setter.Value>
+									<SolidColorBrush Color="{StaticResource FocusFgColor}" />
+								</Setter.Value>
+							</Setter>
+							<Setter TargetName="ImageStart" Property="Source" Value="/Images/Main/nav_left_course_hover.png" />
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsMouseOver" Value="True"/>
+								<Condition Property="Selector.IsSelected" Value="False"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="Background" TargetName="Bd">
+								<Setter.Value>
+									<SolidColorBrush Color="{StaticResource FocusBgColor}" />
+								</Setter.Value>
+							</Setter>
+							<Setter TargetName="Content" Property="TextBlock.Foreground">
+								<Setter.Value>
+									<SolidColorBrush Color="{StaticResource FocusFgColor}" />
+								</Setter.Value>
+							</Setter>
+							<Setter TargetName="ImageStart" Property="Source" Value="/Images/Main/nav_left_course_hover.png" />
+						</MultiTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="MyQuestionTabItemStyle" TargetType="{x:Type TabItem}">
+		<Setter Property="FocusVisualStyle" Value="{x:Null}" />
+		<Setter Property="Foreground" Value="#ffffffff"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type TabItem}">
+					<Grid Height="43">
+						<Border CornerRadius="5" x:Name="Bd" Background="{TemplateBinding Background}" Height="33" Width="129">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="38" />
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								<Image x:Name="ImageStart" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Right" Source="/Images/Main/nav_left_question_normal.png" Width="16" Height="16" />
+								<ContentPresenter Grid.Column="1" Margin="5,0,0,0"
+											x:Name="Content" 
+											ContentTemplate="{TemplateBinding HeaderTemplate}" 
+											Content="{TemplateBinding Header}" 
+											ContentStringFormat="{TemplateBinding HeaderStringFormat}" 
+											ContentSource="Header" 
+											HorizontalAlignment="Left" 
+											RecognizesAccessKey="True" TextBlock.FontSize="14"
+											VerticalAlignment="Center"/>
+							</Grid>
+						</Border>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsSelected" Value="True">
+							<Setter Property="Background" TargetName="Bd">
+								<Setter.Value>
+									<SolidColorBrush Color="{StaticResource FocusBgColor}" />
+								</Setter.Value>
+							</Setter>
+							<Setter TargetName="Content" Property="TextBlock.Foreground">
+								<Setter.Value>
+									<SolidColorBrush Color="{StaticResource FocusFgColor}" />
+								</Setter.Value>
+							</Setter>
+							<Setter TargetName="ImageStart" Property="Source" Value="/Images/Main/nav_left_question_hover.png" />
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsMouseOver" Value="True"/>
+								<Condition Property="Selector.IsSelected" Value="False"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="Background" TargetName="Bd">
+								<Setter.Value>
+									<SolidColorBrush Color="{StaticResource FocusBgColor}" />
+								</Setter.Value>
+							</Setter>
+							<Setter TargetName="Content" Property="TextBlock.Foreground">
+								<Setter.Value>
+									<SolidColorBrush Color="{StaticResource FocusFgColor}" />
+								</Setter.Value>
+							</Setter>
+							<Setter TargetName="ImageStart" Property="Source" Value="/Images/Main/nav_left_question_hover.png" />
+						</MultiTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="MyNoteTabItemStyle" TargetType="{x:Type TabItem}">
+		<Setter Property="FocusVisualStyle" Value="{x:Null}" />
+		<Setter Property="Foreground" Value="#ffffffff"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type TabItem}">
+					<Grid Height="43">
+						<Border CornerRadius="5" x:Name="Bd" Background="{TemplateBinding Background}" Height="33" Width="129">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="38" />
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								<Image x:Name="ImageStart" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Right" Source="/Images/Main/nav_left_notes_normal.png" Width="16" Height="16" />
+								<ContentPresenter Grid.Column="1" Margin="5,0,0,0"
+											x:Name="Content" 
+											ContentTemplate="{TemplateBinding HeaderTemplate}" 
+											Content="{TemplateBinding Header}" 
+											ContentStringFormat="{TemplateBinding HeaderStringFormat}" 
+											ContentSource="Header" 
+											HorizontalAlignment="Left" 
+											RecognizesAccessKey="True" TextBlock.FontSize="14"
+											VerticalAlignment="Center"/>
+							</Grid>
+						</Border>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsSelected" Value="True">
+							<Setter Property="Background" TargetName="Bd">
+								<Setter.Value>
+									<SolidColorBrush Color="{StaticResource FocusBgColor}" />
+								</Setter.Value>
+							</Setter>
+							<Setter TargetName="Content" Property="TextBlock.Foreground">
+								<Setter.Value>
+									<SolidColorBrush Color="{StaticResource FocusFgColor}" />
+								</Setter.Value>
+							</Setter>
+							<Setter TargetName="ImageStart" Property="Source" Value="/Images/Main/nav_left_notes_hover.png" />
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsMouseOver" Value="True"/>
+								<Condition Property="Selector.IsSelected" Value="False"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="Background" TargetName="Bd">
+								<Setter.Value>
+									<SolidColorBrush Color="{StaticResource FocusBgColor}" />
+								</Setter.Value>
+							</Setter>
+							<Setter TargetName="Content" Property="TextBlock.Foreground">
+								<Setter.Value>
+									<SolidColorBrush Color="{StaticResource FocusFgColor}" />
+								</Setter.Value>
+							</Setter>
+							<Setter TargetName="ImageStart" Property="Source" Value="/Images/Main/nav_left_notes_hover.png" />
+						</MultiTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="MyMobileTabItemStyle" TargetType="{x:Type TabItem}">
+		<Setter Property="FocusVisualStyle" Value="{x:Null}" />
+		<Setter Property="Foreground" Value="#ffffffff"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type TabItem}">
+					<Grid Height="43">
+						<Border CornerRadius="5" x:Name="Bd" Background="{TemplateBinding Background}" Height="33" Width="129">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="38" />
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								<Image x:Name="ImageStart" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Right" Source="/Images/Main/nav_left_mobile_normal.png" Width="16" Height="16" />
+								<ContentPresenter Grid.Column="1" Margin="5,0,0,0"
+											x:Name="Content" 
+											ContentTemplate="{TemplateBinding HeaderTemplate}" 
+											Content="{TemplateBinding Header}" 
+											ContentStringFormat="{TemplateBinding HeaderStringFormat}" 
+											ContentSource="Header" 
+											HorizontalAlignment="Left" 
+											RecognizesAccessKey="True" TextBlock.FontSize="14"
+											VerticalAlignment="Center"/>
+							</Grid>
+						</Border>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsSelected" Value="True">
+							<Setter Property="Background" TargetName="Bd">
+								<Setter.Value>
+									<SolidColorBrush Color="{StaticResource FocusBgColor}" />
+								</Setter.Value>
+							</Setter>
+							<Setter TargetName="Content" Property="TextBlock.Foreground">
+								<Setter.Value>
+									<SolidColorBrush Color="{StaticResource FocusFgColor}" />
+								</Setter.Value>
+							</Setter>
+							<Setter TargetName="ImageStart" Property="Source" Value="/Images/Main/nav_left_mobile_hover.png" />
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsMouseOver" Value="True"/>
+								<Condition Property="Selector.IsSelected" Value="False"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="Background" TargetName="Bd">
+								<Setter.Value>
+									<SolidColorBrush Color="{StaticResource FocusBgColor}" />
+								</Setter.Value>
+							</Setter>
+							<Setter TargetName="Content" Property="TextBlock.Foreground">
+								<Setter.Value>
+									<SolidColorBrush Color="{StaticResource FocusFgColor}" />
+								</Setter.Value>
+							</Setter>
+							<Setter TargetName="ImageStart" Property="Source" Value="/Images/Main/nav_left_mobile_hover.png" />
+						</MultiTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+    <Style x:Key="MyServiceTabItemStyle" TargetType="{x:Type TabItem}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Foreground" Value="#ffffffff"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid Height="43">
+                        <Border CornerRadius="5" x:Name="Bd" Background="{TemplateBinding Background}" Height="33" Width="129">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="38" />
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image x:Name="ImageStart" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Right" Source="/Images/Main/nav_left_service_normal.png" Width="16" Height="16" />
+                                <ContentPresenter Grid.Column="1" Margin="5,0,0,0"
+											x:Name="Content" 
+											ContentTemplate="{TemplateBinding HeaderTemplate}" 
+											Content="{TemplateBinding Header}" 
+											ContentStringFormat="{TemplateBinding HeaderStringFormat}" 
+											ContentSource="Header" 
+											HorizontalAlignment="Left" 
+											RecognizesAccessKey="True" TextBlock.FontSize="14"
+											VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" TargetName="Bd">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{StaticResource FocusBgColor}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="Content" Property="TextBlock.Foreground">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{StaticResource FocusFgColor}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="ImageStart" Property="Source" Value="/Images/Main/nav_left_service_hover.png" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="Selector.IsSelected" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Bd">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{StaticResource FocusBgColor}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="Content" Property="TextBlock.Foreground">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{StaticResource FocusFgColor}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="ImageStart" Property="Source" Value="/Images/Main/nav_left_service_hover.png" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

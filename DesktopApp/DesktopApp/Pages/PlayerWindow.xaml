@@ -1,0 +1,212 @@
+﻿<Window x:Class="DesktopApp.Pages.PlayerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:toolkit="http://cdeledu.com/winfx/toolkit"
+        xmlns:iconpacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:DesktopApp.Converters"
+        xmlns:viewmodel="clr-namespace:DesktopApp.ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewmodel:PlayerWindowViewModel}"
+        mc:Ignorable="d"
+        Title="{Binding}"
+        Style="{StaticResource PlayerWindowStyle}"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        x:Name="MediaPlayerWindow">
+    <Window.Resources>
+        <converters:TimeSpanToTupleConverter x:Key="TimeSpanToTupleConverter" />
+        <converters:WatchingDataToTupleConverter x:Key="WatchingDataToTupleConverter" />
+    </Window.Resources>
+
+    <behaviors:Interaction.Triggers>
+        <behaviors:EventTrigger EventName="Loaded">
+            <behaviors:InvokeCommandAction Command="{Binding UpdateTimeCommand}">
+                <behaviors:InvokeCommandAction.CommandParameter>
+                    <MultiBinding Converter="{StaticResource TimeSpanToTupleConverter}">
+                        <Binding ElementName="MediaPlayerElement"
+                                 Path="Position" />
+                        <Binding ElementName="MediaPlayerElement"
+                                 Path="Duration" />
+                    </MultiBinding>
+                </behaviors:InvokeCommandAction.CommandParameter>
+            </behaviors:InvokeCommandAction>
+            <behaviors:InvokeCommandAction Command="{Binding LoadKnowledgePointsCommand}" />
+        </behaviors:EventTrigger>
+        <behaviors:TimerTrigger MillisecondsPerTick="180000">
+            <behaviors:InvokeCommandAction Command="{Binding UploadRecordCommand}"
+                                           CommandParameter="{Binding ElementName=MediaPlayerElement,Path=Position}" />
+            <behaviors:InvokeCommandAction Command="{Binding RecordWatchingDataCommand}">
+                <behaviors:InvokeCommandAction.CommandParameter>
+                    <MultiBinding Converter="{StaticResource WatchingDataToTupleConverter}">
+                        <Binding ElementName="MediaPlayerElement"
+                                 Path="Length" />
+                        <Binding ElementName="MediaPlayerElement"
+                                 Path="Position" />
+                        <Binding ElementName="MediaPlayerWindow"
+                                 Path="BeginTime" />
+                        <Binding ElementName="MediaPlayerWindow"
+                                 Path="EndTime" />
+                        <Binding ElementName="MediaPlayerElement"
+                                 Path="SpeedRatio" />
+                    </MultiBinding>
+                </behaviors:InvokeCommandAction.CommandParameter>
+            </behaviors:InvokeCommandAction>
+        </behaviors:TimerTrigger>
+        <behaviors:EventTrigger EventName="Closing">
+            <behaviors:InvokeCommandAction Command="{Binding UploadRecordCommand}"
+                                           CommandParameter="{Binding ElementName=MediaPlayerElement,Path=Position}" />
+            <behaviors:InvokeCommandAction Command="{Binding UpdateTimeCommand}">
+                <behaviors:InvokeCommandAction.CommandParameter>
+                    <MultiBinding Converter="{StaticResource TimeSpanToTupleConverter}">
+                        <Binding ElementName="MediaPlayerElement"
+                                 Path="Position" />
+                        <Binding ElementName="MediaPlayerElement"
+                                 Path="Duration" />
+                    </MultiBinding>
+                </behaviors:InvokeCommandAction.CommandParameter>
+            </behaviors:InvokeCommandAction>
+            <behaviors:InvokeCommandAction Command="{Binding RecordWatchingDataCommand}">
+                <behaviors:InvokeCommandAction.CommandParameter>
+                    <MultiBinding Converter="{StaticResource WatchingDataToTupleConverter}">
+                        <Binding ElementName="MediaPlayerElement"
+                                 Path="Length" />
+                        <Binding ElementName="MediaPlayerElement"
+                                 Path="Position" />
+                        <Binding ElementName="MediaPlayerWindow"
+                                 Path="BeginTime" />
+                        <Binding ElementName="MediaPlayerWindow"
+                                 Path="EndTime" />
+                        <Binding ElementName="MediaPlayerElement"
+                                 Path="SpeedRatio" />
+                    </MultiBinding>
+                </behaviors:InvokeCommandAction.CommandParameter>
+            </behaviors:InvokeCommandAction>
+        </behaviors:EventTrigger>
+    </behaviors:Interaction.Triggers>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition x:Name="LecturesColumn"
+                              Width="1*" />
+        </Grid.ColumnDefinitions>
+        <toolkit:MediaPlayerElement x:Name="MediaPlayerElement"
+                                    Grid.Column="0"
+                                    Source="{Binding VideoItem.VideoPath}"
+                                    PositionChanged="MediaPlayerElement_PositionChanged">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="QuestionButton"
+                        Style="{StaticResource PlayerMenuButtonStyle}"
+                        Command="{Binding QuestionCommand}"
+                        Margin="0,0,16,0"
+                        Content="提问" />
+                <ToggleButton x:Name="LectureToggleButton"
+                              Style="{StaticResource LectureToggleButtonStyle}"
+                              Margin="0,0,16,0" />
+            </StackPanel>
+            <behaviors:Interaction.Triggers>
+                <behaviors:EventTrigger SourceName="QuestionButton"
+                                        EventName="Click">
+                    <behaviors:InvokeCommandAction Command="{x:Static MediaCommands.Pause}" />
+                </behaviors:EventTrigger>
+                <behaviors:DataTrigger Binding="{Binding ElementName=LectureToggleButton,Path=IsChecked}"
+                                       Value="True">
+                    <behaviors:ChangePropertyAction TargetName="LecturePanel"
+                                                    PropertyName="Visibility"
+                                                    Value="Visible" />
+                    <behaviors:ChangePropertyAction TargetName="Splitter"
+                                                    PropertyName="Visibility"
+                                                    Value="Visible" />
+                    <behaviors:ChangePropertyAction TargetName="LecturesColumn"
+                                                    PropertyName="Width"
+                                                    Value="1*" />
+                </behaviors:DataTrigger>
+                <behaviors:DataTrigger Binding="{Binding ElementName=LectureToggleButton,Path=IsChecked}"
+                                       Value="False">
+                    <behaviors:ChangePropertyAction TargetName="LecturePanel"
+                                                    PropertyName="Visibility"
+                                                    Value="Collapsed" />
+                    <behaviors:ChangePropertyAction TargetName="Splitter"
+                                                    PropertyName="Visibility"
+                                                    Value="Collapsed" />
+                    <behaviors:ChangePropertyAction TargetName="LecturesColumn"
+                                                    PropertyName="Width"
+                                                    Value="Auto" />
+                </behaviors:DataTrigger>
+                <behaviors:PropertyChangedTrigger Binding="{Binding ElementName=MediaPlayerElement,Path=IsPlaying}">
+                    <behaviors:InvokeCommandAction Command="{Binding RecordWatchingDataCommand}">
+                        <behaviors:InvokeCommandAction.CommandParameter>
+                            <MultiBinding Converter="{StaticResource WatchingDataToTupleConverter}">
+                                <Binding ElementName="MediaPlayerElement"
+                                         Path="Length" />
+                                <Binding ElementName="MediaPlayerElement"
+                                         Path="Position" />
+                                <Binding ElementName="MediaPlayerWindow"
+                                         Path="BeginTime" />
+                                <Binding ElementName="MediaPlayerWindow"
+                                         Path="EndTime" />
+                                <Binding ElementName="MediaPlayerElement"
+                                         Path="SpeedRatio" />
+                            </MultiBinding>
+                        </behaviors:InvokeCommandAction.CommandParameter>
+                    </behaviors:InvokeCommandAction>
+                </behaviors:PropertyChangedTrigger>
+            </behaviors:Interaction.Triggers>
+        </toolkit:MediaPlayerElement>
+        <GridSplitter x:Name="Splitter"
+                      Grid.Column="1"
+                      Width="8"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Center"
+                      DragStarted="Splitter_DragStarted"
+                      DragCompleted="Splitter_DragCompleted" />
+        <DockPanel x:Name="LecturePanel"
+                   Grid.Column="2"
+                   LastChildFill="True">
+            <DockPanel DockPanel.Dock="Top"
+                       Background="#F5B21C">
+                <StackPanel Orientation="Horizontal"
+                            DockPanel.Dock="Left"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Margin="8,4"
+                            Visibility="Collapsed">
+                    <iconpacks:PackIconMaterial Kind="Sync"
+                                                Foreground="#AB1700"
+                                                VerticalAlignment="Center" />
+                    <TextBlock Text="同步讲义"
+                               Foreground="#AB1700"
+                               VerticalAlignment="Center"
+                               Margin="4,0,0,0" />
+                </StackPanel>
+                <ComboBox DockPanel.Dock="Right"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Right"
+                          Margin="8,4"
+                          SelectionChanged="ComboBox_SelectionChanged">
+                    <ComboBoxItem Content="较小"
+                                  FontSize="12" />
+                    <ComboBoxItem Content="正常"
+                                  FontSize="14"
+                                  IsSelected="True" />
+                    <ComboBoxItem Content="较大"
+                                  FontSize="16" />
+                    <ComboBoxItem Content="特大"
+                                  FontSize="18" />
+                </ComboBox>
+            </DockPanel>
+            <WebBrowser x:Name="WebBrowser"
+                        LoadCompleted="WebBrowser_LoadCompleted"
+                        Loaded="WebBrowser_Loaded">
+                <behaviors:Interaction.Triggers>
+                    <behaviors:EventTrigger EventName="Loaded">
+                        <behaviors:InvokeCommandAction Command="{Binding LoadLecturesCommand}" />
+                    </behaviors:EventTrigger>
+                </behaviors:Interaction.Triggers>
+            </WebBrowser>
+        </DockPanel>
+    </Grid>
+</Window>

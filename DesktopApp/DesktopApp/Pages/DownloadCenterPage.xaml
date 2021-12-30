@@ -1,0 +1,363 @@
+﻿<Page x:Class="DesktopApp.Pages.DownloadCenterPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="clr-namespace:DesktopApp.Controls"
+      xmlns:infrastructure="clr-namespace:DesktopApp.Infrastructure"
+      mc:Ignorable="d"
+      FontFamily="{StaticResource BaseFont}"
+      DataContext="{Binding Path=DownloadCenter, Source={StaticResource Locator}}"
+      d:DesignHeight="300"
+      d:DesignWidth="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border Background="#FAFAFA"
+                Height="40"
+                Grid.Row="0"
+                BorderBrush="#DDD"
+                BorderThickness="0,0,0,2">
+            <Grid>
+                <StackPanel Orientation="Horizontal"
+                            Margin="20,0">
+                    <CheckBox x:Name="ChkAll"
+                              Content="全选"
+                              Margin="0,0,10,0"
+                              Click="ChkAll_OnClick"
+                              Foreground="{StaticResource CustomForegroundBrush}" />
+
+                    <!--开始下载按钮-->
+                    <controls:ImageButton x:Name="ImgStart"
+                                          NormalImage="/Images/Chapter/btn_start.png"
+                                          HoverImage="/Images/Chapter/btn_start_press.png"
+                                          PressedImage="/Images/Chapter/btn_start_press.png"
+                                          DisabledImage="/Images/Chapter/btn_start_disabled.png"
+                                          ImageHeight="15"
+                                          ImageWidth="13"
+                                          Foreground="White"
+                                          Margin="20,0,40,0"
+                                          HorizontalAlignment="Right"
+                                          Command="{Binding StartCommand}"
+                                          CommandParameter="{Binding}"
+                                          ToolTip="开始">
+                        <controls:ImageButton.Content>
+                            <TextBlock Text="开始"
+                                       VerticalAlignment="Center"
+                                       Margin="10,0,-40,0"
+                                       Foreground="{StaticResource CustomForegroundBrush}" />
+                        </controls:ImageButton.Content>
+                    </controls:ImageButton>
+                    <!--暂停下载按钮-->
+                    <controls:ImageButton x:Name="ImgPause"
+                                          NormalImage="/Images/Chapter/btn_pause.png"
+                                          HoverImage="/Images/Chapter/btn_pause_press.png"
+                                          PressedImage="/Images/Chapter/btn_pause_press.png"
+                                          DisabledImage="/Images/Chapter/btn_pause_disabled.png"
+                                          ImageHeight="15"
+                                          ImageWidth="13"
+                                          Foreground="White"
+                                          Margin="0,0,40,0"
+                                          HorizontalAlignment="Right"
+                                          Command="{Binding PauseCommand}"
+                                          CommandParameter="{Binding}"
+                                          ToolTip="暂停">
+                        <controls:ImageButton.Content>
+                            <TextBlock Text="暂停"
+                                       VerticalAlignment="Center"
+                                       Margin="10,0,-40,0"
+                                       Foreground="{StaticResource CustomForegroundBrush}" />
+                        </controls:ImageButton.Content>
+                    </controls:ImageButton>
+                    <!--取消下载按钮-->
+                    <controls:ImageButton x:Name="ImgDel"
+                                          NormalImage="/Images/Chapter/btn_cancel_press.png"
+                                          HoverImage="/Images/Chapter/btn_cancel.png"
+                                          PressedImage="/Images/Chapter/btn_cancel.png"
+                                          DisabledImage="/Images/Chapter/btn_cancel_disabled.png"
+                                          ImageHeight="15"
+                                          ImageWidth="13"
+                                          Foreground="White"
+                                          Margin="0,0,5,0"
+                                          HorizontalAlignment="Right"
+                                          Command="{Binding DelCommand}"
+                                          CommandParameter="{Binding}"
+                                          ToolTip="取消">
+                        <controls:ImageButton.Content>
+                            <TextBlock Text="取消"
+                                       VerticalAlignment="Center"
+                                       Margin="10,0,-40,0"
+                                       Foreground="{StaticResource CustomForegroundBrush}" />
+                        </controls:ImageButton.Content>
+                    </controls:ImageButton>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Margin="10,0">
+                    <TextBlock Text="{Binding DownloadCount}"
+                               Foreground="#444"
+                               Margin="10,0,5,0" />
+                    <TextBlock Text="个下载任务"
+                               Foreground="#555" />
+                </StackPanel>
+            </Grid>
+        </Border>
+        <DataGrid x:Name="DgData"
+                  Grid.Row="1"
+                  Background="Transparent"
+                  RowStyle="{StaticResource ChapterRowStyle}"
+                  ItemsSource="{Binding Items}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="1*"
+                                        IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <i:Interaction.Behaviors>
+                                    <infrastructure:EnumStateBehavior EnumProperty="{Binding VideoState}" />
+                                </i:Interaction.Behaviors>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="VisualStateGroup">
+
+                                        <VisualState x:Name="Downloading">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                               Storyboard.TargetName="SliderStateDownloading">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{x:Static Visibility.Visible}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Wait">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                               Storyboard.TargetName="SliderStateDownloading">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{x:Static Visibility.Collapsed}" />
+                                                </ObjectAnimationUsingKeyFrames>
+
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+                                                                              Storyboard.TargetName="TxtName">
+                                                    <EasingColorKeyFrame KeyTime="0"
+                                                                         Value="#5D5D5D" />
+                                                </ColorAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pause">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                               Storyboard.TargetName="SliderStateDownloading">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{x:Static Visibility.Collapsed}" />
+                                                </ObjectAnimationUsingKeyFrames>
+
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+                                                                              Storyboard.TargetName="TxtName">
+                                                    <EasingColorKeyFrame KeyTime="0"
+                                                                         Value="#5D5D5D" />
+                                                </ColorAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+
+                                        <VisualState x:Name="Error">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                               Storyboard.TargetName="SliderStateDownloading">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{x:Static Visibility.Collapsed}" />
+                                                </ObjectAnimationUsingKeyFrames>
+
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                               Storyboard.TargetName="BtnRedownload">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{x:Static Visibility.Visible}" />
+                                                </ObjectAnimationUsingKeyFrames>
+
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                               Storyboard.TargetName="TxtValue">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{x:Static Visibility.Hidden}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                               Storyboard.TargetName="TxtName">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{x:Static Visibility.Visible}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+                                                                              Storyboard.TargetName="TxtName">
+                                                    <EasingColorKeyFrame KeyTime="0"
+                                                                         Value="{StaticResource CustomWarningColor}" />
+                                                </ColorAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+
+                                        <VisualState x:Name="DownloadError">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                               Storyboard.TargetName="SliderStateDownloading">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{x:Static Visibility.Collapsed}" />
+                                                </ObjectAnimationUsingKeyFrames>
+
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                               Storyboard.TargetName="BtnContinue">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{x:Static Visibility.Visible}" />
+                                                </ObjectAnimationUsingKeyFrames>
+
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                               Storyboard.TargetName="TxtValue">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{x:Static Visibility.Hidden}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                               Storyboard.TargetName="TxtName">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{x:Static Visibility.Visible}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+                                                                              Storyboard.TargetName="TxtName">
+                                                    <EasingColorKeyFrame KeyTime="0"
+                                                                         Value="{StaticResource CustomWarningColor}" />
+                                                </ColorAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="VerticalAlignment"
+                                                Value="Center" />
+                                    </Style>
+                                </Grid.Resources>
+                                <ProgressBar Grid.Column="0"
+                                             Grid.ColumnSpan="5"
+                                             x:Name="SliderStateDownloading"
+                                             Foreground="#211567B2"
+                                             Minimum="0"
+                                             Maximum="100"
+                                             Background="Transparent"
+                                             BorderThickness="0"
+                                             VerticalAlignment="Stretch"
+                                             VerticalContentAlignment="Stretch"
+                                             Value="{Binding DownloadValue}"
+                                             ToolTip="{Binding DownloadValueStr}">
+                                    <ProgressBar.Template>
+                                        <ControlTemplate>
+                                            <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    Name="border">
+                                                <Grid>
+                                                    <Rectangle Fill="{TemplateBinding Background}"
+                                                               Name="PART_Track" />
+                                                    <Rectangle Margin="0,0,0,1"
+                                                               Fill="{TemplateBinding Foreground}"
+                                                               Name="PART_Indicator"
+                                                               HorizontalAlignment="Left" />
+                                                </Grid>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </ProgressBar.Template>
+                                </ProgressBar>
+                                <CheckBox Grid.Column="0"
+                                          Margin="15,0,-12,0"
+                                          VerticalAlignment="Center"
+                                          Click="ChkItem_OnClick"
+                                          IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                </CheckBox>
+
+                                <!--未下载完成显示TxtName-->
+                                <TextBlock Grid.Column="1"
+                                           x:Name="TxtName"
+                                           Text="{Binding VideoName}"
+                                           ToolTip="{Binding VideoName}"
+                                           Foreground="{StaticResource CustomTextHighlightBrush}"
+                                           VerticalAlignment="Center"
+                                           TextTrimming="CharacterEllipsis" />
+
+                                <TextBlock Grid.Column="2"
+                                           Text="{Binding VideoType}"
+                                           Foreground="#666"
+                                           VerticalAlignment="Center"
+                                           Margin="10,0,10,0"
+                                           FontSize="12"
+                                           Width="75" />
+                                <TextBlock Grid.Column="3"
+                                           Text="{Binding DownloadValueStr}"
+                                           Foreground="#666"
+                                           VerticalAlignment="Center"
+                                           Margin="10,0,10,0"
+                                           FontSize="12"
+                                           Width="140" />
+                                <TextBlock Grid.Column="3"
+                                           Text="{Binding VideoStateStr}"
+                                           Foreground="#666"
+                                           VerticalAlignment="Center"
+                                           TextAlignment="Center"
+                                           Margin="10,0,10,0"
+                                           FontSize="12"
+                                           Width="130" />
+                                <!--下载速度-->
+                                <TextBlock Grid.Column="4"
+                                           x:Name="TxtValue"
+                                           Text="{Binding Speed}"
+                                           Foreground="#666"
+                                           VerticalAlignment="Center"
+                                           Margin="20,0,0,0"
+                                           FontSize="12"
+                                           Width="70" />
+
+                                <!--重新下载-->
+                                <controls:ImageButton Grid.Column="4"
+                                                      x:Name="BtnRedownload"
+                                                      NormalImage="/Images/Chapter/btn_play_chapter_normal.png"
+                                                      HoverImage="/Images/Chapter/btn_play_chapter_hover.png"
+                                                      PressedImage="/Images/Chapter/btn_play_chapter_press.png"
+                                                      ImageWidth="60"
+                                                      Visibility="Collapsed"
+                                                      Command="{Binding DownloadCenter.RedownloadCommand,Source={StaticResource Locator}}"
+                                                      CommandParameter="{Binding}"
+                                                      Width="70">
+                                    <controls:ImageButton.Content>
+                                        <TextBlock Text="重新下载"
+                                                   Foreground="White"
+                                                   FontSize="11" />
+                                    </controls:ImageButton.Content>
+                                </controls:ImageButton>
+                                <!--继续下载-->
+                                <controls:ImageButton Grid.Column="4"
+                                                      x:Name="BtnContinue"
+                                                      NormalImage="/Images/Chapter/btn_play_chapter_normal.png"
+                                                      HoverImage="/Images/Chapter/btn_play_chapter_hover.png"
+                                                      PressedImage="/Images/Chapter/btn_play_chapter_press.png"
+                                                      ImageWidth="60"
+                                                      Visibility="Collapsed"
+                                                      Command="{Binding DownloadCenter.ContinueDownloadCommand,Source={StaticResource Locator}}"
+                                                      CommandParameter="{Binding}"
+                                                      Width="70">
+                                    <controls:ImageButton.Content>
+                                        <TextBlock Text="继续下载"
+                                                   Foreground="White"
+                                                   FontSize="11" />
+                                    </controls:ImageButton.Content>
+                                </controls:ImageButton>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

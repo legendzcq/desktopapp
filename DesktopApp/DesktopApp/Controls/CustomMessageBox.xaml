@@ -1,0 +1,93 @@
+﻿<Window x:Class="DesktopApp.Controls.CustomMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ctrl="clr-namespace:DesktopApp.Controls"
+        FontFamily="{StaticResource BaseFont}" 
+		Height="280" Width="450" AllowsTransparency="True" 
+		Background="Transparent" 
+		ResizeMode="NoResize" 
+		ShowInTaskbar="False" 
+		WindowStartupLocation="CenterScreen" 
+		Topmost="True"
+		WindowStyle="None">
+	<Border BorderBrush="#33000000" BorderThickness="6">
+		<Grid Background="White">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<Grid Grid.Row="0" Height="30" Background="{StaticResource MainBgBrush}">
+				<TextBlock x:Name="TxtTitle" FontSize="17" Margin="5,0" VerticalAlignment="Center" Text="提示" Foreground="#FFFFFF"/>
+			</Grid>
+			<Image Grid.Row="0" x:Name="ImgClose" Source="/Images/Main/msgbox_close.png" Cursor="Hand" Height="25" Margin="0,0,5,0" HorizontalAlignment="Right"/>
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                <TextBlock x:Name="TxtContent" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" Text="" FontSize="15" TextWrapping="Wrap" Width="400"/>
+            </ScrollViewer>
+            <CheckBox x:Name="ChkAgree" Grid.Row="2" Margin="30,0,0,0" FontSize="15" HorizontalAlignment="Left" Height="30" Width="auto"/>
+            <Grid x:Name="GridBtns" Grid.Row="3" HorizontalAlignment="Right" Margin="5">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Button Grid.Row="0" FontSize="15" x:Name="BtnYes" Margin="0,0,20,0" Content="是" Style="{StaticResource SmallButtonStyle}" Width="76" Height="33" IsEnabled="{Binding IsChecked, ElementName=ChkAgree}" />
+				<Button Grid.Row="0" FontSize="15" x:Name="BtnNo" Content="否" Grid.Column="1" Style="{StaticResource CancelButtonStyle}" Width="76" Height="33" />
+			</Grid>
+
+			<StackPanel x:Name="PanelSelect" Grid.Row="1" Visibility="Collapsed">
+				<GroupBox Header="视频保存目录设置" VerticalAlignment="Top" Margin="0,10,0,0">
+					<StackPanel>
+						<StackPanel Orientation="Horizontal" Height="40">
+							<TextBox x:Name="TxtPath" 
+                         Width="180"
+                         Margin="0,0,20,0"
+                         Text="C:\Downloads" 
+                         IsEnabled="False" 
+                         VerticalAlignment="Center"/>
+
+							<ctrl:ImageButton ImageWidth="76" ImageHeight="30"
+                                              NormalImage="/Images/Main/msgbox_ok_normal.png"
+                                              HoverImage="/Images/Main/msgbox_ok_hover.png"
+                                              PressedImage="/Images/Main/msgbox_ok_press.png"
+                                              Foreground="White"
+                                              FontSize="14"
+                                              Content="选择" 
+                                              Click="SelectDirectory_OnClick" Cursor="Hand"/>
+						</StackPanel>
+
+						<TextBlock Text="提示：请勿移动下载目录中的文件！" FontSize="12" Foreground="{StaticResource CustomWarningBrush}"/>
+					</StackPanel>
+				</GroupBox>
+				<GroupBox Header="下载保存目录设置" VerticalAlignment="Top" Margin="0,10,0,0">
+					<StackPanel>
+						<StackPanel Orientation="Horizontal" Height="40">
+							<TextBox x:Name="TxtDownloadPath" 
+                         Width="180"
+                         Margin="0,0,20,0"
+                         Text="C:\Downloads" 
+                         IsEnabled="False" 
+                         VerticalAlignment="Center"/>
+
+							<ctrl:ImageButton ImageWidth="76" ImageHeight="30"
+                                              NormalImage="/Images/Main/msgbox_ok_normal.png"
+                                              HoverImage="/Images/Main/msgbox_ok_hover.png"
+                                              PressedImage="/Images/Main/msgbox_ok_press.png"
+                                              Foreground="White"
+                                              FontSize="14"
+                                              Content="选择" 
+                                              Click="SelectDownloadDirectory_OnClick" Cursor="Hand"/>
+						</StackPanel>
+
+						<TextBlock Text="提示：请勿移动下载目录中的文件！" FontSize="12" Foreground="{StaticResource CustomWarningBrush}"/>
+					</StackPanel>
+				</GroupBox>
+				<GroupBox Header="默认下载视频格式" Margin="0,10">
+					<StackPanel Orientation="Horizontal" Height="40">
+						<RadioButton x:Name="RdHd" GroupName="SelFormat" Content="高清"  VerticalAlignment="Center" IsChecked="True" />
+						<RadioButton x:Name="RdSd" GroupName="SelFormat" Content="标清" Margin="12,0,0,0" VerticalAlignment="Center" />
+					</StackPanel>
+				</GroupBox>
+			</StackPanel>
+		</Grid>
+	</Border>
+</Window>

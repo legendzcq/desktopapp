@@ -1,0 +1,1082 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="clr-namespace:DesktopApp.Controls"
+      xmlns:converters="clr-namespace:DesktopApp.Converters"
+      xmlns:infrastructure="clr-namespace:DesktopApp.Infrastructure"
+      x:Class="DesktopApp.Pages.ChapterPage"
+      mc:Ignorable="d"
+      FontFamily="{StaticResource BaseFont}"
+      FontSize="14"
+      d:DesignHeight="300"
+      d:DesignWidth="600"
+      KeepAlive="True">
+
+    <Page.Resources>
+        <converters:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
+        <Style x:Key="GroupHeaderStyle"
+               TargetType="{x:Type GroupItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel Margin="10,0,0,0">
+                            <Border MinWidth="212"
+                                    HorizontalAlignment="Left"
+                                    BorderBrush="{StaticResource DataGridBorderBrush}"
+                                    BorderThickness="1"
+                                    Margin="0,2,0,0"
+                                    CornerRadius="15"
+                                    Height="29">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1"
+                                                         MappingMode="RelativeToBoundingBox"
+                                                         StartPoint="0.5,0">
+                                        <GradientStop Color="{StaticResource DataGridBorderOffset1Color}"
+                                                      Offset="1" />
+                                        <GradientStop Color="{StaticResource DataGridBorderOffset2Color}"
+                                                      Offset="0.525" />
+                                        <GradientStop Color="{StaticResource DataGridBorderOffset2Color}"
+                                                      Offset="0.5" />
+                                        <GradientStop Color="#FFFFFF" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+
+                                <TextBlock Margin="30,0"
+                                           Text="{Binding Name}"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource CustomForegroundBrush}" />
+                            </Border>
+                            <Border Margin="12,-1,0,0"
+                                    BorderBrush="{StaticResource DataGridBorderBrush}"
+                                    BorderThickness="0,0,0,1" />
+                            <ItemsPresenter />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--切换动画-->
+        <Storyboard x:Key="NormalToSelectStoryboard">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                              Storyboard.TargetName="DgSelect">
+                <EasingThicknessKeyFrame KeyTime="0"
+                                         Value="30,0,0,0">
+                    <EasingThicknessKeyFrame.EasingFunction>
+                        <SineEase EasingMode="EaseOut" />
+                    </EasingThicknessKeyFrame.EasingFunction>
+                </EasingThicknessKeyFrame>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.3"
+                                         Value="0" />
+            </ThicknessAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="GridSelect">
+                <EasingDoubleKeyFrame KeyTime="0"
+                                      Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <SineEase EasingMode="EaseOut" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3"
+                                      Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                              Storyboard.TargetName="DgData">
+                <EasingThicknessKeyFrame KeyTime="0"
+                                         Value="-30,0,0,0" />
+            </ThicknessAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="DgData">
+                <EasingDoubleKeyFrame KeyTime="0"
+                                      Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="GridSelect">
+                <DiscreteObjectKeyFrame KeyTime="0"
+                                        Value="{x:Static Visibility.Visible}" />
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.3"
+                                        Value="{x:Static Visibility.Visible}" />
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="SelectToNormalStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="GridSelect">
+                <EasingDoubleKeyFrame KeyTime="0"
+                                      Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <SineEase EasingMode="EaseOut" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                              Storyboard.TargetName="DgData">
+                <EasingThicknessKeyFrame KeyTime="0"
+                                         Value="-30,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.3"
+                                         Value="0">
+                    <EasingThicknessKeyFrame.EasingFunction>
+                        <SineEase EasingMode="EaseOut" />
+                    </EasingThicknessKeyFrame.EasingFunction>
+                </EasingThicknessKeyFrame>
+            </ThicknessAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="DgData">
+                <EasingDoubleKeyFrame KeyTime="0"
+                                      Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3"
+                                      Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <SineEase EasingMode="EaseOut" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="GridSelect">
+                <DiscreteObjectKeyFrame KeyTime="0"
+                                        Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+    <Page.DataContext>
+        <Binding Path="ChapterList"
+                 Source="{StaticResource Locator}" />
+    </Page.DataContext>
+    <i:Interaction.Behaviors>
+        <i:DataStateBehavior Binding="{Binding State}"
+                             Value="View"
+                             TrueState="View" />
+        <i:DataStateBehavior Binding="{Binding State}"
+                             Value="Select"
+                             TrueState="Select" />
+        <i:DataStateBehavior Binding="{Binding State}"
+                             Value="Delete"
+                             TrueState="Delete" />
+    </i:Interaction.Behaviors>
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="VisualStateGroup">
+            <VisualState x:Name="View">
+                <Storyboard>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                   Storyboard.TargetName="GridSelect">
+                        <EasingDoubleKeyFrame KeyTime="0"
+                                              Value="0">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <SineEase EasingMode="EaseOut" />
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                    </DoubleAnimationUsingKeyFrames>
+                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                                      Storyboard.TargetName="DgData">
+                        <EasingThicknessKeyFrame KeyTime="0"
+                                                 Value="-30,0,0,0" />
+                        <EasingThicknessKeyFrame KeyTime="0:0:0.3"
+                                                 Value="0">
+                            <EasingThicknessKeyFrame.EasingFunction>
+                                <SineEase EasingMode="EaseOut" />
+                            </EasingThicknessKeyFrame.EasingFunction>
+                        </EasingThicknessKeyFrame>
+                    </ThicknessAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                   Storyboard.TargetName="DgData">
+                        <EasingDoubleKeyFrame KeyTime="0"
+                                              Value="0" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.3"
+                                              Value="1">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <SineEase EasingMode="EaseOut" />
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                    </DoubleAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                   Storyboard.TargetName="GridSelect">
+                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                Value="{x:Static Visibility.Collapsed}" />
+                    </ObjectAnimationUsingKeyFrames>
+
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                   Storyboard.TargetName="BtnSelectDownload">
+                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                Value="{x:Static Visibility.Visible}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <!--添加批量删除dgh-->
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                   Storyboard.TargetName="BtnMultDel">
+                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                Value="{x:Static Visibility.Visible}" />
+                    </ObjectAnimationUsingKeyFrames>
+
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                   Storyboard.TargetName="BtnStartDownload">
+                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                Value="{x:Static Visibility.Collapsed}" />
+                    </ObjectAnimationUsingKeyFrames>
+
+                    <!--添加批量删除dgh-->
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                   Storyboard.TargetName="BtnStartDel">
+                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                Value="{x:Static Visibility.Collapsed}" />
+                    </ObjectAnimationUsingKeyFrames>
+                </Storyboard>
+            </VisualState>
+            <VisualState x:Name="Select">
+                <Storyboard>
+                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                                      Storyboard.TargetName="DgSelect">
+                        <EasingThicknessKeyFrame KeyTime="0"
+                                                 Value="30,0,0,0">
+                            <EasingThicknessKeyFrame.EasingFunction>
+                                <SineEase EasingMode="EaseOut" />
+                            </EasingThicknessKeyFrame.EasingFunction>
+                        </EasingThicknessKeyFrame>
+                        <EasingThicknessKeyFrame KeyTime="0:0:0.3"
+                                                 Value="0" />
+                    </ThicknessAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                   Storyboard.TargetName="GridSelect">
+                        <EasingDoubleKeyFrame KeyTime="0"
+                                              Value="0">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <SineEase EasingMode="EaseOut" />
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.3"
+                                              Value="1" />
+                    </DoubleAnimationUsingKeyFrames>
+                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                                      Storyboard.TargetName="DgData">
+                        <EasingThicknessKeyFrame KeyTime="0"
+                                                 Value="-30,0,0,0" />
+                    </ThicknessAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                   Storyboard.TargetName="DgData">
+                        <EasingDoubleKeyFrame KeyTime="0"
+                                              Value="0" />
+                    </DoubleAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                   Storyboard.TargetName="GridSelect">
+                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                Value="{x:Static Visibility.Visible}" />
+                        <DiscreteObjectKeyFrame KeyTime="0:0:0.3"
+                                                Value="{x:Static Visibility.Visible}" />
+                    </ObjectAnimationUsingKeyFrames>
+
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                   Storyboard.TargetName="BtnSelectDownload">
+                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                Value="{x:Static Visibility.Collapsed}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <!--批量删除dgh-->
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                   Storyboard.TargetName="BtnMultDel">
+                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                Value="{x:Static Visibility.Collapsed}" />
+                    </ObjectAnimationUsingKeyFrames>
+
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                   Storyboard.TargetName="BtnStartDownload">
+                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                Value="{x:Static Visibility.Visible}" />
+                    </ObjectAnimationUsingKeyFrames>
+
+                    <!--批量删除dgh-->
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                   Storyboard.TargetName="BtnStartDel">
+                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                Value="{x:Static Visibility.Collapsed}" />
+                    </ObjectAnimationUsingKeyFrames>
+                </Storyboard>
+            </VisualState>
+            <VisualState x:Name="Delete">
+                <Storyboard>
+                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                                      Storyboard.TargetName="DgSelect">
+                        <EasingThicknessKeyFrame KeyTime="0"
+                                                 Value="30,0,0,0">
+                            <EasingThicknessKeyFrame.EasingFunction>
+                                <SineEase EasingMode="EaseOut" />
+                            </EasingThicknessKeyFrame.EasingFunction>
+                        </EasingThicknessKeyFrame>
+                        <EasingThicknessKeyFrame KeyTime="0:0:0.3"
+                                                 Value="0" />
+                    </ThicknessAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                   Storyboard.TargetName="GridSelect">
+                        <EasingDoubleKeyFrame KeyTime="0"
+                                              Value="0">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <SineEase EasingMode="EaseOut" />
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.3"
+                                              Value="1" />
+                    </DoubleAnimationUsingKeyFrames>
+                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)"
+                                                      Storyboard.TargetName="DgData">
+                        <EasingThicknessKeyFrame KeyTime="0"
+                                                 Value="-30,0,0,0" />
+                    </ThicknessAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                   Storyboard.TargetName="DgData">
+                        <EasingDoubleKeyFrame KeyTime="0"
+                                              Value="0" />
+                    </DoubleAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                   Storyboard.TargetName="GridSelect">
+                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                Value="{x:Static Visibility.Visible}" />
+                        <DiscreteObjectKeyFrame KeyTime="0:0:0.3"
+                                                Value="{x:Static Visibility.Visible}" />
+                    </ObjectAnimationUsingKeyFrames>
+
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                   Storyboard.TargetName="BtnSelectDownload">
+                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                Value="{x:Static Visibility.Collapsed}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <!--批量删除dgh-->
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                   Storyboard.TargetName="BtnMultDel">
+                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                Value="{x:Static Visibility.Collapsed}" />
+                    </ObjectAnimationUsingKeyFrames>
+
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                   Storyboard.TargetName="BtnStartDownload">
+                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                Value="{x:Static Visibility.Collapsed}" />
+                    </ObjectAnimationUsingKeyFrames>
+
+                    <!--批量删除dgh-->
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                   Storyboard.TargetName="BtnStartDel">
+                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                Value="{x:Static Visibility.Visible}" />
+                    </ObjectAnimationUsingKeyFrames>
+                </Storyboard>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid Height="34"
+                  ColumnSpan="2"
+                  VerticalAlignment="Center">
+                <TextBlock x:Name="PageTitle"
+                           Text="{Binding PageTitle}"
+                           Style="{StaticResource PageTitleStyle}" />
+            </Grid>
+            <Grid Grid.Column="1"
+                  HorizontalAlignment="Center">
+                <Button x:Name="BtnSelectDownload"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Height="30"
+                        Width="100"
+                        Margin="0,0,20,0"
+                        Command="{Binding SelectDownloadCommand}"
+                        Style="{StaticResource BigButtonStyle}">
+                    <TextBlock Foreground="White"
+                               FontSize="17"
+                               Text="批量下载" />
+                </Button>
+                <!--添加批量删除dgh-->
+                <Button x:Name="BtnMultDel"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Height="30"
+                        Width="100"
+                        Margin="0,0,130,0"
+                        Command="{Binding MultDeleteCommand}"
+                        Style="{StaticResource BigButtonStyle}">
+                    <TextBlock Foreground="White"
+                               FontSize="17"
+                               Text="批量删除" />
+                </Button>
+
+                <Button x:Name="BtnStartDownload"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Height="30"
+                        Width="100"
+                        Margin="0,0,20,0"
+                        Command="{Binding StartDownloadCommand}"
+                        Style="{StaticResource BigButtonStyle}"
+                        Visibility="Collapsed">
+                    <TextBlock Foreground="White"
+                               FontSize="17"
+                               Text="开始下载" />
+                </Button>
+                <!--添加批量删除dgh-->
+                <Button x:Name="BtnStartDel"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Height="30"
+                        Width="100"
+                        Margin="0,0,20,0"
+                        Command="{Binding StartDeleteCommand}"
+                        Style="{StaticResource BigButtonStyle}"
+                        Visibility="Collapsed">
+                    <TextBlock Foreground="White"
+                               FontSize="17"
+                               Text="开始删除" />
+                </Button>
+
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="19*" />
+                <ColumnDefinition Width="11*" />
+            </Grid.ColumnDefinitions>
+            <!-- 查看下载课程DataGrid -->
+            <DataGrid x:Name="DgData"
+                      Background="Transparent"
+                      RowStyle="{StaticResource ChapterRowStyle}"
+                      ItemsSource="{Binding ChapterList}"
+                      Grid.ColumnSpan="2">
+                <DataGrid.GroupStyle>
+                    <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}">
+                        <GroupStyle.Panel>
+                            <ItemsPanelTemplate>
+                                <DataGridRowsPresenter />
+                            </ItemsPanelTemplate>
+                        </GroupStyle.Panel>
+                    </GroupStyle>
+                </DataGrid.GroupStyle>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="1*"
+                                            IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <i:Interaction.Behaviors>
+                                        <infrastructure:EnumStateBehavior EnumProperty="{Binding VideoState}" />
+                                    </i:Interaction.Behaviors>
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="VisualStateGroup">
+                                            <VisualState x:Name="NotOpen">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateWait">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateDownloading">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateDone">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="BtnPlay">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ImgDel">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="TxtValue">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Visible}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+                                                                                  Storyboard.TargetName="TxtName">
+                                                        <EasingColorKeyFrame KeyTime="0"
+                                                                             Value="#696969" />
+                                                    </ColorAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Undownload">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateWait">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateDownloading">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateDone">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="BtnPlay">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ImgDel">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="BtnStartDownload">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Visible}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="TxtValue">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+                                                                                  Storyboard.TargetName="TxtName">
+                                                        <EasingColorKeyFrame KeyTime="0"
+                                                                             Value="#696969" />
+                                                    </ColorAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Downloading">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateUndownload">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateWait">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateDownloading">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Visible}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateDone">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+
+                                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+                                                                                  Storyboard.TargetName="TxtName">
+                                                        <EasingColorKeyFrame KeyTime="0"
+                                                                             Value="{StaticResource CustomTextHighlightColor}" />
+                                                    </ColorAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="BtnPlay">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Wait">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateUndownload">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateWait">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Visible}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateDownloading">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateDone">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="BtnPlay">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+                                                                                  Storyboard.TargetName="TxtName">
+                                                        <EasingColorKeyFrame KeyTime="0"
+                                                                             Value="Black" />
+                                                    </ColorAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Pause">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateUndownload">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateWait">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Visible}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateDownloading">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateDone">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="BtnPlay">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+                                                                                  Storyboard.TargetName="TxtName">
+                                                        <EasingColorKeyFrame KeyTime="0"
+                                                                             Value="Black" />
+                                                    </ColorAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Done">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateUndownload">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateWait">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateDownloading">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateDone">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Visible}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="TxtValue">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="TxtDoneName">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Visible}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="TxtName">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+
+                                            <VisualState x:Name="Error">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateUndownload">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateWait">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateDownloading">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgError">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Visible}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="BtnRedownload">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Visible}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="BtnPlay">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ImgDel">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    
+
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="TxtValue">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="TxtDoneName">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="TxtName">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Visible}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+                                                                                  Storyboard.TargetName="TxtName">
+                                                        <EasingColorKeyFrame KeyTime="0"
+                                                                             Value="{StaticResource CustomWarningColor}" />
+                                                    </ColorAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="DownloadError">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateUndownload">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateWait">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgStateDownloading">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="ImgError">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Visible}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="BtnContinue">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Visible}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="BtnPlay">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ImgDel">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="TxtValue">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Hidden}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="TxtDoneName">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Collapsed}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                                   Storyboard.TargetName="TxtName">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{x:Static Visibility.Visible}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+                                                                                  Storyboard.TargetName="TxtName">
+                                                        <EasingColorKeyFrame KeyTime="0"
+                                                                             Value="{StaticResource CustomWarningColor}" />
+                                                    </ColorAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment"
+                                                    Value="Center" />
+                                        </Style>
+                                    </Grid.Resources>
+
+                                    <Image Grid.Column="0"
+                                           x:Name="ImgStateUndownload"
+                                           Height="17"
+                                           Source="/Images/Chapter/undownload.png"
+                                           Width="40"
+                                           ToolTip="未下载" />
+                                    <Image Grid.Column="0"
+                                           x:Name="ImgStateWait"
+                                           Height="17"
+                                           Source="/Images/Chapter/wait.png"
+                                           Width="40"
+                                           Visibility="Collapsed"
+                                           ToolTip="下载等待" />
+                                    <Image Grid.Column="0"
+                                           x:Name="ImgError"
+                                           Height="15"
+                                           Source="/Images/Chapter/error.png"
+                                           Width="40"
+                                           Visibility="Collapsed"
+                                           ToolTip="下载错误" />
+                                    <Image Grid.Column="0"
+                                           x:Name="ImgStateDone"
+                                           Height="17"
+                                           Source="/Images/Chapter/play.png"
+                                           Width="40"
+                                           Visibility="Collapsed"
+                                           ToolTip="下载完成" />
+
+                                    <Image Grid.Column="0"
+                                           x:Name="ImgStateDownloading"
+                                           Height="17"
+                                           Source="/Images/Chapter/wait.png"
+                                           Width="40"
+                                           Visibility="Collapsed"
+                                           ToolTip="正在下载" />
+
+                                    <!--未下载完成显示TxtName-->
+                                    <TextBlock Grid.Column="1"
+                                               x:Name="TxtName"
+                                               Text="{Binding VideoName}"
+                                               ToolTip="{Binding VideoName}"
+                                               Foreground="#5D5D5D"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left" />
+                                    <!--下载完成显示TxtDoneName-->
+                                    <TextBlock Grid.Column="1"
+                                               x:Name="TxtDoneName"
+                                               Text="{Binding VideoName}"
+                                               ToolTip="{Binding VideoName}"
+                                               Style="{StaticResource LinkTextStyle}"
+                                               Visibility="Collapsed"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                <i:InvokeCommandAction Command="{Binding ChapterList.NavPlayPageCommand,Source={StaticResource Locator}}"
+                                                                       CommandParameter="{Binding}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBlock>
+
+                                    <TextBlock Grid.Column="2"
+                                               x:Name="TxtLength"
+                                               Text="{Binding VideoLength}"
+                                               Foreground="#5D5D5D"
+                                               FontSize="12"
+                                               ToolTip="{Binding VideoLength}"
+                                               Margin="20,0" />
+
+                                    <!--下载速度-->
+                                    <TextBlock Grid.Column="3"
+                                               x:Name="TxtValue"
+                                               Text="{Binding VideoStateStr}"
+                                               Foreground="#666"
+                                               VerticalAlignment="Center"
+                                               Margin="20,0,0,0"
+                                               FontSize="12"
+                                               Width="80" />
+                                    <!--下载-->
+                                    <Button Grid.Column="3"
+                                            x:Name="BtnStartDownload"
+                                            Visibility="Collapsed"
+                                            Width="60"
+                                            Height="30"
+                                            Style="{StaticResource SmallButtonStyle}"
+                                            Content="下载"
+                                            Command="{Binding ChapterList.StartDownloadOneCommand,Source={StaticResource Locator}}"
+                                            CommandParameter="{Binding}" />
+                                    <!--重新下载-->
+                                    <Button Grid.Column="3"
+                                            x:Name="BtnRedownload"
+                                            Visibility="Collapsed"
+                                            Width="60"
+                                            Height="30"
+                                            Style="{StaticResource SmallButtonStyle}"
+                                            Content="重新下载"
+                                            Command="{Binding ChapterList.RedownloadCommand,Source={StaticResource Locator}}"
+                                            CommandParameter="{Binding}" />
+                                    <!--继续下载-->
+                                    <Button Grid.Column="3"
+                                            x:Name="BtnContinue"
+                                            Visibility="Collapsed"
+                                            Width="60"
+                                            Height="30"
+                                            Style="{StaticResource SmallButtonStyle}"
+                                            Content="继续下载"
+                                            Command="{Binding ChapterList.ContinueDownloadCommand,Source={StaticResource Locator}}"
+                                            CommandParameter="{Binding}" />
+                                    
+                                    <!--播放按钮-->
+                                    <Button Grid.Column="3"
+                                            x:Name="BtnPlay"
+                                            Width="60"
+                                            Height="30"
+                                            Style="{StaticResource SmallPlayButtonStyle}"
+                                            Content="播放"
+                                            Command="{Binding ChapterList.NavPlayPageCommand,Source={StaticResource Locator}}"
+                                            CommandParameter="{Binding}" />
+                                    
+                                    <!--删除按钮-->
+                                    <controls:ImageButton Grid.Column="4"
+                                                          x:Name="ImgDel"
+                                                          NormalImage="/Images/Chapter/btn_cancel_normal.png"
+                                                          HoverImage="/Images/Chapter/btn_cancel_press.png"
+                                                          PressedImage="/Images/Chapter/btn_cancel_press.png"
+                                                          ImageHeight="15"
+                                                          ImageWidth="13"
+                                                          Foreground="White"
+                                                          Margin="0,0,10,0"
+                                                          HorizontalAlignment="Right"
+                                                          Command="{Binding ChapterList.DelCommand,Source={StaticResource Locator}}"
+                                                          CommandParameter="{Binding}"
+                                                          ToolTip="删除" />
+                                    <!--重新下载按钮-->
+                                    <controls:ImageButton Grid.Column="5"
+                                                          x:Name="BtnUpdate"
+                                                          NormalImage="/Images/Chapter/reload.png"
+                                                          HoverImage="/Images/Chapter/reload.png"
+                                                          PressedImage="/Images/Chapter/reload.png"
+                                                          ImageHeight="15"
+                                                          ImageWidth="15"
+                                                          Margin="0,0,20,0"
+                                                          Command="{Binding ChapterList.UpdateDownloadCommand,Source={StaticResource Locator}}"
+                                                          CommandParameter="{Binding}"
+                                                          Visibility="{Binding BolUpdate, Converter={StaticResource BooleanToVisibilityHiddenConverter}}"
+                                                          ToolTip="该章节有更新,点击重新下载" />
+
+                                </Grid>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- 选择下载课程DataGrid -->
+            <Grid x:Name="GridSelect"
+                  Opacity="0"
+                  Visibility="Collapsed"
+                  Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <DataGrid x:Name="DgSelect"
+                          Background="Transparent"
+                          RowStyle="{StaticResource ChapterRowStyle}"
+                          SelectionMode="Extended"
+                          ItemsSource="{Binding UndownloadList}">
+                    <DataGrid.GroupStyle>
+                        <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}">
+                            <GroupStyle.Panel>
+                                <ItemsPanelTemplate>
+                                    <DataGridRowsPresenter />
+                                </ItemsPanelTemplate>
+                            </GroupStyle.Panel>
+                        </GroupStyle>
+                    </DataGrid.GroupStyle>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Width="1*"
+                                                IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal"
+                                                    VerticalAlignment="Center">
+                                            <CheckBox Width="30"
+                                                      Margin="20,0,0,0"
+                                                      VerticalAlignment="Center"
+                                                      IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      Visibility="{Binding IsCanSelect, Converter={StaticResource BooleanToVisibilityHiddenConverter}}">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <i:InvokeCommandAction Command="{Binding ChapterList.ChkCommand,Source={StaticResource Locator}}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </CheckBox>
+
+                                            <TextBlock Text="{Binding VideoName}"
+                                                       ToolTip="{Binding VideoName}" />
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="1"
+                                                    Orientation="Horizontal"
+                                                    HorizontalAlignment="Right"
+                                                    Margin="15,0,60,0"
+                                                    VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding VideoLength}"
+                                                       Foreground="#5D5D5D"
+                                                       ToolTip="{Binding VideoLength}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Border Background="#FAFAFA"
+                        Height="40"
+                        Grid.Row="1"
+                        BorderBrush="#DDD"
+                        BorderThickness="0,2,0,0">
+                    <CheckBox x:Name="ChkAll"
+                              Content="全选"
+                              Margin="20,0,0,0"
+                              IsChecked="{Binding ChkAllIsChecked}"
+                              Foreground="{StaticResource CustomForegroundBrush}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding ChkAllClickCommand}"
+                                                       CommandParameter="{Binding ElementName=ChkAll,Path=IsChecked}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                </Border>
+            </Grid>
+        </Grid>
+        <controls:CircularProgressBar Grid.Row="0"
+                                      Grid.RowSpan="2"
+                                      Visibility="{Binding IsShowLoading, Converter={StaticResource Bool2Visibility}}" />
+    </Grid>
+</Page>

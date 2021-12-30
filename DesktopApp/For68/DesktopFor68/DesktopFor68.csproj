@@ -1,0 +1,990 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6E2C24E1-2C5F-4DFF-8D7B-A36E7F4B4EDD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DesktopApp</RootNamespace>
+    <AssemblyName>CdelCourse</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath />
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;FOR68</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;FOR68,MULTYDOWN;MULTYTASK</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\DesktopApp.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>DesktopApp.App</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37223, Culture=neutral, PublicKeyToken=0e453835af4ee6ce, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmLightLibs.5.2.0.0\lib\net40\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.2.0.37224, Culture=neutral, PublicKeyToken=f46ff315b1088208, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmLightLibs.5.2.0.0\lib\net40\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Drawing">
+      <HintPath>F:\改花项目\CDEL.DesktopApp\DesktopApp\bin\Debug\Microsoft.Expression.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions">
+      <HintPath>F:\改花项目\CDEL.DesktopApp\DesktopApp\bin\Debug\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>..\..\packages\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>..\..\packages\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="PresentationFramework.Classic" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmLightLibs.5.2.0.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\DesktopApp\App.xaml.cs">
+      <Link>App.xaml.cs</Link>
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Controls\AutoMessageBox.xaml.cs">
+      <Link>Controls\AutoMessageBox.xaml.cs</Link>
+      <DependentUpon>AutoMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Controls\CircularProgressBar.xaml.cs">
+      <Link>Controls\CircularProgressBar.xaml.cs</Link>
+      <DependentUpon>CircularProgressBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Controls\CustomMessageBox.xaml.cs">
+      <Link>Controls\CustomMessageBox.xaml.cs</Link>
+      <DependentUpon>CustomMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Controls\CustomWindow.xaml.cs">
+      <Link>Controls\CustomWindow.xaml.cs</Link>
+      <DependentUpon>CustomWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Controls\ImageButton.cs">
+      <Link>Controls\ImageButton.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Controls\WebBrowserHelper.cs">
+      <Link>Controls\WebBrowserHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Controls\WebBrowserOverlay.xaml.cs">
+      <Link>Controls\WebBrowserOverlay.xaml.cs</Link>
+      <DependentUpon>WebBrowserOverlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Controls\WinTimeSelect.xaml.cs">
+      <Link>Controls\WinTimeSelect.xaml.cs</Link>
+      <DependentUpon>WinTimeSelect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Converters\BooleanToVisibilityHiddenConverter.cs">
+      <Link>Converters\BooleanToVisibilityHiddenConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Converters\BoolToFavStringConverter.cs">
+      <Link>Converters\BoolToFavStringConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Infrastructure\EnumStateBehavior.cs">
+      <Link>Infrastructure\EnumStateBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Infrastructure\FrameEx.cs">
+      <Link>Infrastructure\FrameEx.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Infrastructure\NavigationViewModelBase.cs">
+      <Link>Infrastructure\NavigationViewModelBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Infrastructure\TokenManager.cs">
+      <Link>Infrastructure\TokenManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Logic\DownloadManagerLogic.cs">
+      <Link>Logic\DownloadManagerLogic.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Logic\StudentImport.cs">
+      <Link>Logic\StudentImport.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Logic\StudentLogic.cs">
+      <Link>Logic\StudentLogic.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Logic\StudentQuestionLogic.cs">
+      <Link>Logic\StudentQuestionLogic.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Logic\StudentWareLogic.cs">
+      <Link>Logic\StudentWareLogic.cs</Link>
+    </Compile>
+    <ApplicationDefinition Include="..\..\DesktopApp\App.xaml">
+      <Link>App.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="..\..\DesktopApp\Pages\AboutPage.xaml.cs">
+      <Link>Pages\AboutPage.xaml.cs</Link>
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\AdvanceSetting.xaml.cs">
+      <Link>Pages\AdvanceSetting.xaml.cs</Link>
+      <DependentUpon>AdvanceSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\CenterListPage.xaml.cs">
+      <Link>Pages\CenterListPage.xaml.cs</Link>
+      <DependentUpon>CenterListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\ChapterPage.xaml.cs">
+      <Link>Pages\ChapterPage.xaml.cs</Link>
+      <DependentUpon>ChapterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\CoursePage.xaml.cs">
+      <Link>Pages\CoursePage.xaml.cs</Link>
+      <DependentUpon>CoursePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\CourseRecord.xaml.cs">
+      <Link>Pages\CourseRecord.xaml.cs</Link>
+      <DependentUpon>CourseRecord.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\CourseSettingPage.xaml.cs">
+      <Link>Pages\CourseSettingPage.xaml.cs</Link>
+      <DependentUpon>CourseSettingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\DownloadCenterPage.xaml.cs">
+      <Link>Pages\DownloadCenterPage.xaml.cs</Link>
+      <DependentUpon>DownloadCenterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\ImportPage.xaml.cs">
+      <Link>Pages\ImportPage.xaml.cs</Link>
+      <DependentUpon>ImportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\KcjyDetail.xaml.cs">
+      <Link>Pages\KcjyDetail.xaml.cs</Link>
+      <DependentUpon>KcjyDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\KcjyDownload.xaml.cs">
+      <Link>Pages\KcjyDownload.xaml.cs</Link>
+      <DependentUpon>KcjyDownload.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\MessageListWindow.xaml.cs">
+      <Link>Pages\MessageListWindow.xaml.cs</Link>
+      <DependentUpon>MessageListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\MessageWindow.xaml.cs">
+      <Link>Pages\MessageWindow.xaml.cs</Link>
+      <DependentUpon>MessageWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\MobileDownload.xaml.cs">
+      <Link>Pages\MobileDownload.xaml.cs</Link>
+      <DependentUpon>MobileDownload.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\MobileDownloadDetail.xaml.cs">
+      <Link>Pages\MobileDownloadDetail.xaml.cs</Link>
+      <DependentUpon>MobileDownloadDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\MobileWin.xaml.cs">
+      <Link>Pages\MobileWin.xaml.cs</Link>
+      <DependentUpon>MobileWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\OtherPlaySetting.xaml.cs">
+      <Link>Pages\OtherPlaySetting.xaml.cs</Link>
+      <DependentUpon>OtherPlaySetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\PaperListPage.xaml.cs">
+      <Link>Pages\PaperListPage.xaml.cs</Link>
+      <DependentUpon>PaperListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\PaperPage.xaml.cs">
+      <Link>Pages\PaperPage.xaml.cs</Link>
+      <DependentUpon>PaperPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\PaperScoreList.xaml.cs">
+      <Link>Pages\PaperScoreList.xaml.cs</Link>
+      <DependentUpon>PaperScoreList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\PaperSocreDetail.xaml.cs">
+      <Link>Pages\PaperSocreDetail.xaml.cs</Link>
+      <DependentUpon>PaperSocreDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\PCDeviceInfo.xaml.cs">
+      <Link>Pages\PCDeviceInfo.xaml.cs</Link>
+      <DependentUpon>PCDeviceInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\PlayWindow.xaml.cs">
+      <Link>Pages\PlayWindow.xaml.cs</Link>
+      <DependentUpon>PlayWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\PlayWindow1.xaml.cs">
+      <Link>Pages\PlayWindow1.xaml.cs</Link>
+      <DependentUpon>PlayWindow1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\PointTest.xaml.cs">
+      <Link>Pages\PointTest.xaml.cs</Link>
+      <DependentUpon>PointTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\SetManagePage.xaml.cs">
+      <Link>Pages\SetManagePage.xaml.cs</Link>
+      <DependentUpon>SetManagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\SettingPage.xaml.cs">
+      <Link>Pages\SettingPage.xaml.cs</Link>
+      <DependentUpon>SettingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\SFPlayWindow.xaml.cs">
+      <Link>Pages\SFPlayWindow.xaml.cs</Link>
+      <DependentUpon>SFPlayWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\CourseRecordViewModel.cs">
+      <Link>ViewModel\CourseRecordViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\CourseSettingDetailViewModel.cs">
+      <Link>ViewModel\CourseSettingDetailViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\PaperSocreListModel.cs">
+      <Link>ViewModel\PaperSocreListModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\PaperSocreQuesViewModel.cs">
+      <Link>ViewModel\PaperSocreQuesViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\PaperSocreViewModel.cs">
+      <Link>ViewModel\PaperSocreViewModel.cs</Link>
+    </Compile>
+    <Page Include="..\..\DesktopApp\Controls\AutoMessageBox.xaml">
+      <Link>Controls\AutoMessageBox.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Controls\CircularProgressBar.xaml">
+      <Link>Controls\CircularProgressBar.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Controls\CustomMessageBox.xaml">
+      <Link>Controls\CustomMessageBox.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Controls\CustomWindow.xaml">
+      <Link>Controls\CustomWindow.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Controls\WebBrowserOverlay.xaml">
+      <Link>Controls\WebBrowserOverlay.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="..\..\DesktopApp\LoginWindow.xaml.cs">
+      <Link>LoginWindow.xaml.cs</Link>
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\MainWindow.xaml.cs">
+      <Link>MainWindow.xaml.cs</Link>
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\Pages\NetworkSetting.xaml.cs">
+      <Link>Pages\NetworkSetting.xaml.cs</Link>
+      <DependentUpon>NetworkSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\CenterDetailViewModel.cs">
+      <Link>ViewModel\CenterDetailViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\CenterListViewModel.cs">
+      <Link>ViewModel\CenterListViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\ChapterDetailViewModel.cs">
+      <Link>ViewModel\ChapterDetailViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\ChapterListViewModel.cs">
+      <Link>ViewModel\ChapterListViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\ChapterSelectViewModel.cs">
+      <Link>ViewModel\ChapterSelectViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\CourseDetailViewModel.cs">
+      <Link>ViewModel\CourseDetailViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\CourseSettingViewModel.cs">
+      <Link>ViewModel\CourseSettingViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\CourseViewModel.cs">
+      <Link>ViewModel\CourseViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\DownloadCenterViewModel.cs">
+      <Link>ViewModel\DownloadCenterViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\DownloadItemViewModel.cs">
+      <Link>ViewModel\DownloadItemViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\ImportItemViewModel.cs">
+      <Link>ViewModel\ImportItemViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\ImportViewModel.cs">
+      <Link>ViewModel\ImportViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\KcjyDetailViewModel.cs">
+      <Link>ViewModel\KcjyDetailViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\KcjyDownViewModel.cs">
+      <Link>ViewModel\KcjyDownViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\MainViewModel.cs">
+      <Link>ViewModel\MainViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\MobileDownChapterViewModel.cs">
+      <Link>ViewModel\MobileDownChapterViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\MobileDownDetailViewModel.cs">
+      <Link>ViewModel\MobileDownDetailViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\MobileDownSelectViewModel.cs">
+      <Link>ViewModel\MobileDownSelectViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\MobileDownViewModel.cs">
+      <Link>ViewModel\MobileDownViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\PaperListViewModel.cs">
+      <Link>ViewModel\PaperListViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\PaperResultViewModel.cs">
+      <Link>ViewModel\PaperResultViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\PaperViewModel.cs">
+      <Link>ViewModel\PaperViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\PlayViewModel.cs">
+      <Link>ViewModel\PlayViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\PointTestQuestionViewModel.cs">
+      <Link>ViewModel\PointTestQuestionViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\PointTestViewModel.cs">
+      <Link>ViewModel\PointTestViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\PushMessageViewModel.cs">
+      <Link>ViewModel\PushMessageViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\QuestionItemViewModel.cs">
+      <Link>ViewModel\QuestionItemViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DesktopApp\ViewModel\SetManageViewModel.cs">
+      <Link>ViewModel\SetManageViewModel.cs</Link>
+    </Compile>
+    <Page Include="..\..\DesktopApp\Controls\WinTimeSelect.xaml">
+      <Link>Controls\WinTimeSelect.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\LoginWindow.xaml">
+      <Link>LoginWindow.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\MainWindow.xaml">
+      <Link>MainWindow.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\AboutPage.xaml">
+      <Link>Pages\AboutPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\AdvanceSetting.xaml">
+      <Link>Pages\AdvanceSetting.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\CenterListPage.xaml">
+      <Link>Pages\CenterListPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\ChapterPage.xaml">
+      <Link>Pages\ChapterPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\CoursePage.xaml">
+      <Link>Pages\CoursePage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\CourseRecord.xaml">
+      <Link>Pages\CourseRecord.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\CourseSettingPage.xaml">
+      <Link>Pages\CourseSettingPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\DownloadCenterPage.xaml">
+      <Link>Pages\DownloadCenterPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\ImportPage.xaml">
+      <Link>Pages\ImportPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\KcjyDetail.xaml">
+      <Link>Pages\KcjyDetail.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\KcjyDownload.xaml">
+      <Link>Pages\KcjyDownload.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\MessageListWindow.xaml">
+      <Link>Pages\MessageListWindow.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\MessageWindow.xaml">
+      <Link>Pages\MessageWindow.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\MobileDownload.xaml">
+      <Link>Pages\MobileDownload.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\MobileDownloadDetail.xaml">
+      <Link>Pages\MobileDownloadDetail.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\MobileWin.xaml">
+      <Link>Pages\MobileWin.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\NetworkSetting.xaml">
+      <Link>Pages\NetworkSetting.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\OtherPlaySetting.xaml">
+      <Link>Pages\OtherPlaySetting.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\PaperListPage.xaml">
+      <Link>Pages\PaperListPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\PaperPage.xaml">
+      <Link>Pages\PaperPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\PaperScoreList.xaml">
+      <Link>Pages\PaperScoreList.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\PaperSocreDetail.xaml">
+      <Link>Pages\PaperSocreDetail.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\PCDeviceInfo.xaml">
+      <Link>Pages\PCDeviceInfo.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\PlayWindow.xaml">
+      <Link>Pages\PlayWindow.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\PlayWindow1.xaml">
+      <Link>Pages\PlayWindow1.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\PointTest.xaml">
+      <Link>Pages\PointTest.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\SetManagePage.xaml">
+      <Link>Pages\SetManagePage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\SettingPage.xaml">
+      <Link>Pages\SettingPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\DesktopApp\Pages\SFPlayWindow.xaml">
+      <Link>Pages\SFPlayWindow.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\DataGridStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ImageButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\OfficeTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ScrollViewerStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\TabControlStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\DesktopApp\ViewModel\ViewModelLocator.cs">
+      <Link>ViewModel\ViewModelLocator.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.manifest" />
+    <None Include="db\db.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="interface.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{B699E885-C655-47A9-98DE-6185FBB23E4B}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\btnhover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Chapter\btn_cancel.png" />
+    <Resource Include="Images\Chapter\btn_cancel_disabled.png" />
+    <Resource Include="Images\Chapter\btn_cancel_normal.png" />
+    <Resource Include="Images\Chapter\btn_cancel_press.png" />
+    <Resource Include="Images\Chapter\btn_del_hover.png" />
+    <Resource Include="Images\Chapter\btn_del_normal.png" />
+    <Resource Include="Images\Chapter\btn_del_press.png" />
+    <Resource Include="Images\Chapter\btn_download_hover.png" />
+    <Resource Include="Images\Chapter\btn_download_normal.png" />
+    <Resource Include="Images\Chapter\btn_download_press.png" />
+    <Resource Include="Images\Chapter\btn_pause.png" />
+    <Resource Include="Images\Chapter\btn_pause_disabled.png" />
+    <Resource Include="Images\Chapter\btn_pause_press.png" />
+    <Resource Include="Images\Chapter\btn_play_chapter_hover.png" />
+    <Resource Include="Images\Chapter\btn_play_chapter_normal.png" />
+    <Resource Include="Images\Chapter\btn_play_chapter_press.png" />
+    <Resource Include="Images\Chapter\btn_sdownload_hover.png" />
+    <Resource Include="Images\Chapter\btn_sdownload_normal.png" />
+    <Resource Include="Images\Chapter\btn_sdownload_press.png" />
+    <Resource Include="Images\Chapter\btn_start.png" />
+    <Resource Include="Images\Chapter\btn_start_disabled.png" />
+    <Resource Include="Images\Chapter\btn_start_press.png" />
+    <Resource Include="Images\Chapter\chk_select.png" />
+    <Resource Include="Images\Chapter\chk_unselect.png" />
+    <Resource Include="Images\Chapter\error.png" />
+    <Resource Include="Images\Chapter\grid_title_bg.png" />
+    <Resource Include="Images\Chapter\grid_top_bg.png" />
+    <Resource Include="Images\Chapter\play.png" />
+    <Resource Include="Images\Chapter\undownload.png" />
+    <Resource Include="Images\Chapter\wait.png" />
+    <Resource Include="Images\check.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Course\btn_play_hover.png" />
+    <Resource Include="Images\Course\btn_play_normal.png" />
+    <Resource Include="Images\Course\grid_header_background.png" />
+    <Resource Include="Images\Course\grid_header_left.png" />
+    <Resource Include="Images\Course\grid_splitline.png" />
+    <Resource Include="Images\defaultbg.png" />
+    <Resource Include="Images\DesktopApp.ico" />
+    <Resource Include="Images\Login\bottom_bg.png" />
+    <Resource Include="Images\Login\btn_login.png" />
+    <Resource Include="Images\Login\btn_login_hover.png" />
+    <Resource Include="Images\Login\btn_login_press.png" />
+    <Resource Include="Images\Login\btn_regist.png" />
+    <Resource Include="Images\Login\btn_regist_hover.png" />
+    <Resource Include="Images\Login\btn_regist_press.png" />
+    <Resource Include="Images\Login\login_bg.png" />
+    <Resource Include="Images\Login\top_bg.png" />
+    <Resource Include="Images\Main\btn_close_hover.png" />
+    <Resource Include="Images\Main\btn_close_normal.png" />
+    <Resource Include="Images\Main\btn_close_press.png" />
+    <Resource Include="Images\Main\btn_download_hover.png" />
+    <Resource Include="Images\Main\btn_download_normal.png" />
+    <Resource Include="Images\Main\btn_download_press.png" />
+    <Resource Include="Images\Main\btn_import_hover.png" />
+    <Resource Include="Images\Main\btn_import_normal.png" />
+    <Resource Include="Images\Main\btn_import_press.png" />
+    <Resource Include="Images\Main\btn_left_disabled.png" />
+    <Resource Include="Images\Main\btn_left_hover.png" />
+    <Resource Include="Images\Main\btn_left_normal.png" />
+    <Resource Include="Images\Main\btn_left_press.png" />
+    <Resource Include="Images\Main\btn_max_hover.png" />
+    <Resource Include="Images\Main\btn_max_normal.png" />
+    <Resource Include="Images\Main\btn_max_press.png" />
+    <Resource Include="Images\Main\btn_min_hover.png" />
+    <Resource Include="Images\Main\btn_min_normal.png" />
+    <Resource Include="Images\Main\btn_min_press.png" />
+    <Resource Include="Images\Main\btn_normal_hover.png" />
+    <Resource Include="Images\Main\btn_normal_normal.png" />
+    <Resource Include="Images\Main\btn_normal_press.png" />
+    <Resource Include="Images\Main\btn_right_disabled.png" />
+    <Resource Include="Images\Main\btn_right_hover.png" />
+    <Resource Include="Images\Main\btn_right_normal.png" />
+    <Resource Include="Images\Main\btn_right_press.png" />
+    <Resource Include="Images\Main\btn_setting_hover.png" />
+    <Resource Include="Images\Main\btn_setting_normal.png" />
+    <Resource Include="Images\Main\btn_setting_press.png" />
+    <Resource Include="Images\Main\download_select.png" />
+    <Resource Include="Images\Main\download_unselect.png" />
+    <Resource Include="Images\Main\logo.png" />
+    <Resource Include="Images\Main\main_bg.png" />
+    <Resource Include="Images\Main\main_bottom.png" />
+    <Resource Include="Images\Main\main_top.png" />
+    <Resource Include="Images\Main\msgbox_cancel_hover.png" />
+    <Resource Include="Images\Main\msgbox_cancel_normal.png" />
+    <Resource Include="Images\Main\msgbox_cancel_press.png" />
+    <Resource Include="Images\Main\msgbox_close.png" />
+    <Resource Include="Images\Main\msgbox_ok_hover.png" />
+    <Resource Include="Images\Main\msgbox_ok_normal.png" />
+    <Resource Include="Images\Main\msgbox_ok_press.png" />
+    <Resource Include="Images\Main\mycourse_select.png" />
+    <Resource Include="Images\Main\mycourse_unselect.png" />
+    <Resource Include="Images\Main\paper_select.png" />
+    <Resource Include="Images\Main\paper_unselect.png" />
+    <Resource Include="Images\Main\tab_close.png" />
+    <Resource Include="Images\Main\tab_close_normal.png" />
+    <Resource Include="Images\Main\tab_hover.png" />
+    <Resource Include="Images\Main\tab_hover1.png" />
+    <Resource Include="Images\Main\tab_import_select.png" />
+    <Resource Include="Images\Main\tab_import_unselect.png" />
+    <Resource Include="Images\Main\tab_normal.png" />
+    <Resource Include="Images\Main\tab_normal1.png" />
+    <Resource Include="Images\Main\tab_set_select.png" />
+    <Resource Include="Images\Main\tab_set_unselect.png" />
+    <Resource Include="Images\network_connected.png" />
+    <Resource Include="Images\network_disconnected.png" />
+    <Resource Include="Images\Paper\btn_answer_hover.png" />
+    <Resource Include="Images\Paper\btn_answer_normal.png" />
+    <Resource Include="Images\Paper\btn_errorrecord_hover.png" />
+    <Resource Include="Images\Paper\btn_errorrecord_normal.png" />
+    <Resource Include="Images\Paper\btn_fav_hover.png" />
+    <Resource Include="Images\Paper\btn_fav_normal.png" />
+    <Resource Include="Images\Paper\btn_handin_hover.png" />
+    <Resource Include="Images\Paper\btn_handin_normal.png" />
+    <Resource Include="Images\Paper\btn_next_hover.png" />
+    <Resource Include="Images\Paper\btn_next_normal.png" />
+    <Resource Include="Images\Paper\btn_pre_hover.png" />
+    <Resource Include="Images\Paper\btn_pre_normal.png" />
+    <Resource Include="Images\Paper\btn_refresh_hover.png" />
+    <Resource Include="Images\Paper\btn_refresh_normal.png" />
+    <Resource Include="Images\Paper\btn_refresh_press.png" />
+    <Resource Include="Images\Paper\btn_update_hover.png" />
+    <Resource Include="Images\Paper\btn_update_normal.png" />
+    <Resource Include="Images\Paper\btn_update_press.png" />
+    <Resource Include="Images\Paper\exam_do.png" />
+    <Resource Include="Images\Paper\exam_error.png" />
+    <Resource Include="Images\Paper\exam_right.png" />
+    <Resource Include="Images\Paper\exam_time.png" />
+    <Resource Include="Images\Paper\exam_title_bg.png" />
+    <Resource Include="Images\Paper\exam_undo.png" />
+    <Resource Include="Images\Paper\papericon.png" />
+    <Resource Include="Images\Paper\testleft-bg.png" />
+    <Resource Include="Images\Play\btn_fullback_hover.png" />
+    <Resource Include="Images\Play\btn_fullback_normal.png" />
+    <Resource Include="Images\Play\btn_fullscreen_hover.png" />
+    <Resource Include="Images\Play\btn_fullscreen_normal.png" />
+    <Resource Include="Images\Play\btn_jy.png" />
+    <Resource Include="Images\Play\btn_jy_left_hover.png" />
+    <Resource Include="Images\Play\btn_jy_left_normal.png" />
+    <Resource Include="Images\Play\btn_jy_left_press.png" />
+    <Resource Include="Images\Play\btn_jy_right_hover.png" />
+    <Resource Include="Images\Play\btn_jy_right_normal.png" />
+    <Resource Include="Images\Play\btn_jy_right_press.png" />
+    <Resource Include="Images\Play\btn_left_hover.png" />
+    <Resource Include="Images\Play\btn_left_normal.png" />
+    <Resource Include="Images\Play\btn_pause_hover.png" />
+    <Resource Include="Images\Play\btn_pause_normal.png" />
+    <Resource Include="Images\Play\btn_play_hover.png" />
+    <Resource Include="Images\Play\btn_play_normal.png" />
+    <Resource Include="Images\Play\btn_right_hover.png" />
+    <Resource Include="Images\Play\btn_right_normal.png" />
+    <Resource Include="Images\Play\btn_sound_hover.png" />
+    <Resource Include="Images\Play\btn_sound_normal.png" />
+    <Resource Include="Images\Play\jy_tab.png" />
+    <Resource Include="Images\Play\jy_title_bg.png" />
+    <Resource Include="Images\Play\playctl.png" />
+    <Resource Include="Images\Play\play_bg.png" />
+    <Resource Include="Images\Play\play_split.png" />
+    <Resource Include="Images\Play\sound_speed.png" />
+    <Resource Include="Images\uncheck.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\btn_left_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\btn_left_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\btn_pause_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\btn_pause_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\btn_play_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\btn_play_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\btn_right_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\btn_right_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\btn_sound_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\btn_sound_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\icon_left_downloaded.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\icon_left_nodownload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\play_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\playctl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SFPlay\sound_speed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\btn_Mobile_Press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\btn_Mobile_Cover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\btn_Mobile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Chapter\btn_batchdel_hover.png" />
+    <Resource Include="Images\Chapter\btn_batchdel_normal.png" />
+    <Resource Include="Images\Chapter\btn_batchdel_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\btn_msg_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\btn_msg_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\btn_msg_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_close_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_close_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_close_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_max_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_max_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_max_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_min_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_min_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_min_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_normal_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_normal_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_normal_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\nav_left_course_hover.png" />
+    <Resource Include="Images\Main\nav_left_course_normal.png" />
+    <Resource Include="Images\Main\nav_left_mobile_hover.png" />
+    <Resource Include="Images\Main\nav_left_mobile_normal.png" />
+    <Resource Include="Images\Main\nav_left_notes_hover.png" />
+    <Resource Include="Images\Main\nav_left_notes_normal.png" />
+    <Resource Include="Images\Main\nav_left_question_hover.png" />
+    <Resource Include="Images\Main\nav_left_question_normal.png" />
+    <Resource Include="Images\Main\nav_right_back_disable.png" />
+    <Resource Include="Images\Main\nav_right_back_hover.png" />
+    <Resource Include="Images\Main\nav_right_back_normal.png" />
+    <Resource Include="Images\Main\nav_right_download_hover.png" />
+    <Resource Include="Images\Main\nav_right_download_normal.png" />
+    <Resource Include="Images\Main\nav_right_forward_disable.png" />
+    <Resource Include="Images\Main\nav_right_forward_hover.png" />
+    <Resource Include="Images\Main\nav_right_forward_normal.png" />
+    <Resource Include="Images\Main\nav_right_help_hover.png" />
+    <Resource Include="Images\Main\nav_right_help_normal.png" />
+    <Resource Include="Images\Main\nav_right_import_hover.png" />
+    <Resource Include="Images\Main\nav_right_import_normal.png" />
+    <Resource Include="Images\Main\nav_right_news_hover.png" />
+    <Resource Include="Images\Main\nav_right_news_normal.png" />
+    <Resource Include="Images\Main\nav_right_set_hover.png" />
+    <Resource Include="Images\Main\nav_right_set_normal.png" />
+    <Resource Include="Images\Play\btn_jy_hover.png" />
+    <Resource Include="Images\Play\sound_speed_Hover.png" />
+    <Resource Include="Images\Push\Close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_setting_hover.png" />
+    <Resource Include="Images\btn_setting_normal.png" />
+    <Resource Include="Images\btn_setting_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Chapter\reload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\nav_left_faq_hover.png" />
+    <Resource Include="Images\Main\nav_left_faq_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main\nav_left_service_hover.png" />
+    <Resource Include="Images\Main\nav_left_service_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\defaultbg1.png" />
+    <Resource Include="Images\noline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="Images\Splash.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

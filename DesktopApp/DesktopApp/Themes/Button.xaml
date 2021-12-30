@@ -1,0 +1,139 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:DesktopApp.Controls">
+    <Style x:Key="PlayerMenuButtonStyle"
+           TargetType="Button">
+        <Setter Property="HorizontalContentAlignment"
+                Value="Center" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="Cursor"
+                Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="12"
+                            Background="{TemplateBinding Background}"
+                            Padding="12,4">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="White" />
+                <Setter Property="Foreground"
+                        Value="#333333" />
+            </Trigger>
+            <Trigger Property="IsMouseOver"
+                     Value="False">
+                <Setter Property="Background"
+                        Value="#666666" />
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="White"
+                                         Opacity="0.5" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="LectureToggleButtonStyle"
+           TargetType="ToggleButton">
+        <Setter Property="HorizontalContentAlignment"
+                Value="Center" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="Cursor"
+                Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="12"
+                            Padding="12,4">
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <iconPacks:PackIconMaterial x:Name="Icon"
+                                                        Margin="0,0,2,0"
+                                                        Kind="CloseCircleOutline" />
+                            <TextBlock Text="讲义" />
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked"
+                                 Value="False">
+                            <Setter TargetName="Icon"
+                                    Property="Kind"
+                                    Value="CloseCircleOutline" />
+                        </Trigger>
+                        <Trigger Property="IsChecked"
+                                 Value="True">
+                            <Setter TargetName="Icon"
+                                    Property="Kind"
+                                    Value="CheckboxMarkedCircleOutline" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="White" />
+                <Setter Property="Foreground"
+                        Value="#333333" />
+            </Trigger>
+            <Trigger Property="IsMouseOver"
+                     Value="False">
+                <Setter Property="Background"
+                        Value="#666666" />
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="White"
+                                         Opacity="0.5" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="controls:IconButton">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="Cursor"
+                Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:IconButton">
+                    <Border Background="{TemplateBinding Background}">
+                        <iconPacks:PackIconMaterial Kind="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Kind}"
+                                                    Width="{TemplateBinding Width}"
+                                                    Height="{TemplateBinding Height}"
+                                                    Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="Foreground"
+                        Value="#0A8EE2" />
+            </Trigger>
+            <Trigger Property="IsMouseOver"
+                     Value="False">
+                <Setter Property="Foreground"
+                        Value="#A0A0A0" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

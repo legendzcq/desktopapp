@@ -1,0 +1,222 @@
+﻿<ResourceDictionary x:Class="Consilium.Mobile.Tablet.Theme.ThemeDictionary"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Color x:Key="MainBgColor" >#FFa069dc</Color>
+	<SolidColorBrush x:Key="MainBgBrush" Color="{StaticResource MainBgColor}"/>
+	<Color x:Key="FocusBgColor" >#FF8222eb</Color>
+	<SolidColorBrush x:Key="FocusBgBrush" Color="{StaticResource FocusBgColor}"/>
+	<Color x:Key="FocusFgColor" >#FFfdff7d</Color>
+	<SolidColorBrush x:Key="FocusFgBrush" Color="{StaticResource FocusFgColor}"/>
+	<Color x:Key="BarBgColor">#F0F0F0</Color>
+	<SolidColorBrush x:Key="BarBgBrush" Color="{StaticResource BarBgColor}" />
+	<Color x:Key="MainBorderColor">#055BAD</Color>
+	<SolidColorBrush x:Key="MainBorderBrush" Color="{StaticResource MainBorderColor}"/>
+	
+    <!-- 文本前景色 -->
+    <Color x:Key="CustomTextForegroundColor">#FF333333</Color>
+    <!-- 前景色 -->
+    <Color x:Key="CustomForegroundColor">#FF7E599C</Color>
+    <!-- 背景色 -->
+    <Color x:Key="CustomBackgroundColor">#FFFEFEFE</Color>
+    <!-- 文本高亮前景色 -->
+    <Color x:Key="CustomTextHighlightColor">#FF7E599C</Color>
+    <Color x:Key="CustomWarningColor">#C53127</Color>
+    <Color x:Key="CustomLodingMaskColor">#99FFFFFF</Color>
+    <!--Grid第一列单元格背景色-->
+    <Color x:Key="CustomgGridFirstCellColor">#FFF8E8</Color>
+    <!--播放界面时间文本颜色-->
+    <Color x:Key="CustomgPlayTimeColor">#FFFFFF</Color>
+    <Color x:Key="CustomPlaySplitBackgroundColor">#FF9C6ADA</Color>
+
+    <SolidColorBrush x:Key="CustomForegroundBrush" Color="{StaticResource CustomForegroundColor}"/>
+    <SolidColorBrush x:Key="CustomBackgroundBrush" Color="{StaticResource CustomBackgroundColor}"/>
+    <SolidColorBrush x:Key="CustomTextForegroundBrush" Color="{StaticResource CustomTextForegroundColor}"/>
+    <SolidColorBrush x:Key="CustomTextHighlightBrush" Color="{StaticResource CustomTextHighlightColor}"/>
+    <SolidColorBrush x:Key="CustomWarningBrush" Color="{StaticResource CustomWarningColor}"/>
+    <SolidColorBrush x:Key="CustomgGridFirstCellBrush" Color="{StaticResource CustomgGridFirstCellColor}"/>
+    <SolidColorBrush x:Key="CustomgPlayTimeBrush" Color="{StaticResource CustomgPlayTimeColor}"/>
+    <SolidColorBrush x:Key="CustomPlaySplitBackgroundBrush" Color="{StaticResource CustomPlaySplitBackgroundColor}"/>
+
+    <Style x:Key="PageTitleStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="{StaticResource CustomTextHighlightBrush}" />
+        <Setter Property="Margin" Value="20,0,0,0" />
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="PlayWindowTitleStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="{StaticResource CustomTextHighlightBrush}" />
+        <Setter Property="Margin" Value="20,0,0,0" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="LinkTextStyle" TargetType="TextBlock">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{StaticResource CustomForegroundBrush}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="TextDecorations" Value="Underline"/>
+                <Setter Property="Foreground" Value="{StaticResource CustomTextHighlightBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!--CheckBox的样式-->
+    <Style TargetType="{x:Type CheckBox}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <BulletDecorator FlowDirection="LeftToRight" VerticalAlignment="Center">
+                        <BulletDecorator.Bullet>
+                            <Image x:Name="ImgChk" Source="/Images/Chapter/chk_unselect.png" Height="17"/>
+                        </BulletDecorator.Bullet>
+                        <ContentPresenter Margin="12,0"/>
+                    </BulletDecorator>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="ImgChk" Property="Source" Value="/Images/Chapter/chk_select.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--设置界面按钮样式-->
+    <Color x:Key="CustomgNormalBtnHoverColor">#DDFF7F00</Color>
+    <SolidColorBrush x:Key="CustomgNormalBtnHoverBrush" Color="{StaticResource CustomgNormalBtnHoverColor}"/>
+    <Style x:Key="LogoutBtnStyle" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="#C53127" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="4" Background="{TemplateBinding Background}">
+                        <Grid>
+                            <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#E04343" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#C53127" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="NormalBtnStyle" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{StaticResource CustomForegroundBrush}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="4" Background="{TemplateBinding Background}">
+                        <Grid>
+                            <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource CustomgNormalBtnHoverBrush}" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{StaticResource CustomForegroundBrush}" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+	<Style x:Key="BigButtonStyle" TargetType="{x:Type Button}">
+		<Setter Property="Background" Value="#4cc122" />
+		<Setter Property="Cursor" Value="Hand" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Border CornerRadius="5" Background="{TemplateBinding Background}">
+						<ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background"  Value="#FF58ca2f" />
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Foreground" Value="#FFADADAD"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="SmallButtonStyle" TargetType="{x:Type Button}">
+		<Setter Property="Background" Value="{StaticResource MainBgBrush}" />
+		<Setter Property="Foreground" Value="White" />
+		<Setter Property="Cursor" Value="Hand" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Border CornerRadius="5" Background="{TemplateBinding Background}">
+						<ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background"  Value="#FF239be8" />
+						</Trigger>
+						<Trigger Property="IsPressed" Value="True">
+							<Setter Property="Background" Value="{StaticResource CustomForegroundBrush}" />
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Foreground" Value="#FFc5c5c5"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="CancelButtonStyle" TargetType="{x:Type Button}">
+		<Setter Property="Background" Value="#FFee991f" />
+		<Setter Property="Cursor" Value="Hand" />
+		<Setter Property="Foreground" Value="White" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Border CornerRadius="5" Background="{TemplateBinding Background}">
+						<ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background"  Value="#DDee991f" />
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Foreground" Value="#FFc5c5c5"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>
